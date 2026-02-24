@@ -1,0 +1,1110 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#070A12" />
+  <meta name="description" content="Портфолио Қанатұлы Қуат — Junior Frontend. Адаптивные сайты, чистая вёрстка, Figma → HTML/CSS." />
+  <title>Қанатұлы Қуат — Portfolio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#070A12;
+      --bg2:#090E1A;
+      --card:rgba(255,255,255,.06);
+      --card2:rgba(255,255,255,.08);
+      --stroke:rgba(255,255,255,.12);
+      --text:#EAF0FF;
+      --muted:rgba(234,240,255,.70);
+      --muted2:rgba(234,240,255,.55);
+      --accent:#7C3AED;
+      --accent2:#22C55E;
+      --blue:#3B82F6;
+      --shadow: 0 24px 70px rgba(0,0,0,.55);
+      --shadow2: 0 14px 38px rgba(0,0,0,.35);
+      --r16:16px;
+      --r20:20px;
+      --r24:24px;
+      --max:1180px;
+
+      --ring: 0 0 0 4px rgba(124,58,237,.24);
+      --ring2: 0 0 0 4px rgba(34,197,94,.20);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:
+        radial-gradient(900px 600px at 15% 8%, rgba(124,58,237,.28), transparent 60%),
+        radial-gradient(900px 600px at 80% 12%, rgba(34,197,94,.18), transparent 58%),
+        radial-gradient(900px 600px at 50% 90%, rgba(59,130,246,.14), transparent 62%),
+        linear-gradient(180deg, var(--bg) 0%, #060812 55%, #04050B 100%);
+      color:var(--text);
+      overflow-x:hidden;
+      line-height:1.5;
+    }
+
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+
+    /* selection */
+    ::selection{background: rgba(124,58,237,.35); color: var(--text);}
+
+    .container{width:min(var(--max), calc(100% - 48px)); margin-inline:auto}
+
+    /* skip link */
+    .skip{
+      position:absolute;
+      left:-999px; top:10px;
+      padding:10px 12px;
+      background: rgba(0,0,0,.65);
+      border:1px solid rgba(255,255,255,.18);
+      border-radius: 12px;
+      color: var(--text);
+      z-index:9999;
+    }
+    .skip:focus{left:12px; box-shadow: var(--ring)}
+
+    /* progress bar */
+    .progress{
+      position:fixed; top:0; left:0;
+      height:3px; width:0%;
+      background: linear-gradient(90deg, rgba(124,58,237,1), rgba(34,197,94,1));
+      z-index:1000;
+      box-shadow: 0 10px 30px rgba(124,58,237,.18);
+    }
+
+    .glass{
+      background: linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.04));
+      border:1px solid var(--stroke);
+      box-shadow: var(--shadow2);
+      backdrop-filter: blur(14px);
+    }
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding:12px 16px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color:var(--text);
+      font-weight:700;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease, box-shadow .15s ease;
+      user-select:none;
+      white-space:nowrap;
+      cursor:pointer;
+    }
+    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.10); border-color: rgba(255,255,255,.22)}
+    .btn:active{transform: translateY(0px) scale(.99)}
+    .btn:focus-visible{outline:none; box-shadow: var(--ring)}
+    .btn.primary{
+      border-color: rgba(124,58,237,.60);
+      background: linear-gradient(135deg, rgba(124,58,237,.95), rgba(124,58,237,.58));
+      box-shadow: 0 14px 40px rgba(124,58,237,.28);
+    }
+    .btn.primary:hover{background: linear-gradient(135deg, rgba(124,58,237,1), rgba(124,58,237,.66))}
+    .btn.ghost{background: transparent}
+    .btn.small{padding:10px 12px; border-radius: 12px; font-weight:800; font-size:13px}
+
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color:var(--muted);
+      font-weight:700;
+      font-size:12px;
+    }
+
+    .dot{
+      width:8px;height:8px;border-radius:999px;
+      background: var(--accent2);
+      box-shadow: 0 0 0 5px rgba(34,197,94,.16)
+    }
+    .dot.purple{background: var(--accent); box-shadow: 0 0 0 5px rgba(124,58,237,.18)}
+    .dot.blue{background: var(--blue); box-shadow: 0 0 0 5px rgba(59,130,246,.16)}
+
+    .nav{
+      position:sticky; top:0; z-index:50;
+      background: linear-gradient(180deg, rgba(7,10,18,.78), rgba(7,10,18,.42));
+      border-bottom:1px solid rgba(255,255,255,.10);
+      backdrop-filter: blur(14px);
+    }
+    .nav-wrap{display:flex; align-items:center; justify-content:space-between; padding:14px 0; gap:14px}
+    .brand{display:flex; align-items:center; gap:10px; font-weight:900; letter-spacing:.2px}
+    .brand:focus-visible{outline:none; box-shadow: var(--ring); border-radius: 12px; padding:6px}
+    .logo{
+      width:36px;height:36px;border-radius:12px;
+      background:
+        radial-gradient(12px 12px at 35% 30%, rgba(255,255,255,.70), transparent 60%),
+        linear-gradient(135deg, rgba(124,58,237,1), rgba(34,197,94,.9));
+      box-shadow: 0 18px 50px rgba(124,58,237,.22);
+      border:1px solid rgba(255,255,255,.18);
+      flex:0 0 auto;
+    }
+    .nav-links{display:flex; align-items:center; gap:6px; flex-wrap:wrap}
+    .nav-links a{
+      color:var(--muted);
+      font-weight:800;
+      font-size:13px;
+      padding:10px 10px;
+      border-radius:12px;
+      transition: background .15s ease, color .15s ease, border-color .15s ease;
+      border:1px solid transparent;
+    }
+    .nav-links a:hover{background: rgba(255,255,255,.07); color:var(--text)}
+    .nav-links a.active{
+      color: var(--text);
+      border-color: rgba(124,58,237,.45);
+      background: rgba(124,58,237,.10);
+    }
+    .nav-actions{display:flex; align-items:center; gap:10px; flex-wrap:wrap}
+
+    /* hero */
+    .hero{padding:56px 0 22px}
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.25fr .95fr;
+      gap:28px;
+      align-items:stretch;
+    }
+    .hero-left{
+      padding:26px;
+      border-radius: var(--r24);
+      position:relative;
+      overflow:hidden;
+    }
+    .hero-left:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(520px 260px at 20% 20%, rgba(124,58,237,.26), transparent 60%),
+        radial-gradient(420px 240px at 70% 20%, rgba(34,197,94,.18), transparent 60%),
+        radial-gradient(420px 240px at 20% 80%, rgba(59,130,246,.12), transparent 60%);
+      z-index:0;
+    }
+    .hero-left > *{position:relative; z-index:1}
+
+    .kicker{display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-bottom:16px}
+    h1{margin:0 0 10px; font-size:54px; line-height:1.02; letter-spacing:-1.4px}
+    .grad{
+      background: linear-gradient(90deg, #EAF0FF 0%, #C7D2FE 28%, rgba(124,58,237,1) 64%, rgba(34,197,94,1) 100%);
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+    }
+    .subtitle{margin:0 0 16px; color:var(--muted); font-size:18px; line-height:1.65; max-width:60ch}
+    .meta-row{display:flex; gap:10px; flex-wrap:wrap; margin:18px 0 0}
+    .hero-ctas{display:flex; gap:12px; flex-wrap:wrap; margin-top:18px}
+
+    .hero-right{
+      border-radius: var(--r24);
+      padding:22px;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+      overflow:hidden;
+      position:relative;
+    }
+    .hero-right:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(380px 300px at 70% 10%, rgba(124,58,237,.24), transparent 62%),
+        radial-gradient(380px 300px at 20% 70%, rgba(34,197,94,.14), transparent 64%);
+      z-index:0;
+    }
+    .hero-right > *{position:relative; z-index:1}
+
+    .avatar{
+      border-radius: 22px;
+      border:1px solid rgba(255,255,255,.18);
+      background:
+        radial-gradient(18px 18px at 30% 25%, rgba(255,255,255,.65), transparent 60%),
+        linear-gradient(135deg, rgba(255,255,255,.10), rgba(255,255,255,.04));
+      padding:16px;
+      box-shadow: var(--shadow2);
+      position:relative;
+      overflow:hidden;
+    }
+    .avatar:after{
+      content:"";
+      position:absolute;
+      inset:-120px;
+      background: radial-gradient(240px 140px at 30% 20%, rgba(124,58,237,.18), transparent 60%);
+      transform: rotate(10deg);
+      opacity:.9;
+      pointer-events:none;
+    }
+    .avatar-inner{
+      border-radius: 18px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.12);
+      background:
+        radial-gradient(120px 120px at 30% 20%, rgba(124,58,237,.25), transparent 65%),
+        radial-gradient(120px 120px at 70% 80%, rgba(34,197,94,.18), transparent 65%),
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      height: 240px;
+      display:grid;
+      place-items:center;
+      position:relative;
+      z-index:1;
+    }
+    .initials{
+      width:92px;height:92px;border-radius:26px;
+      display:grid; place-items:center;
+      font-weight:900; font-size:34px; letter-spacing:-1px;
+      color:rgba(255,255,255,.92);
+      background:
+        radial-gradient(18px 18px at 30% 25%, rgba(255,255,255,.70), transparent 60%),
+        linear-gradient(135deg, rgba(124,58,237,1), rgba(34,197,94,.95));
+      border:1px solid rgba(255,255,255,.22);
+      box-shadow: 0 18px 55px rgba(124,58,237,.22);
+    }
+    .hint{font-size:12px; color:var(--muted2)}
+
+    .mini-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+    .mini{
+      border-radius: 18px;
+      padding:14px 14px;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+    .mini:hover{transform: translateY(-2px); border-color: rgba(255,255,255,.22); background: rgba(255,255,255,.08)}
+    .mini h4{margin:0 0 6px; font-size:13px; color:var(--muted2); font-weight:800; letter-spacing:.2px}
+    .mini p{margin:0; font-size:15px; font-weight:800}
+
+    .divider{
+      height:1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.14), transparent);
+      margin: 10px 0 0;
+    }
+    .section{padding:46px 0}
+    .section-head{display:flex; align-items:flex-end; justify-content:space-between; gap:14px; margin-bottom:18px}
+    .section-head h2{margin:0; font-size:30px; letter-spacing:-.7px}
+    .section-head p{margin:0; color:var(--muted); max-width:64ch; line-height:1.65}
+
+    .grid2{display:grid; grid-template-columns: 1.05fr .95fr; gap:18px}
+    .card{border-radius: var(--r20); padding:18px}
+    .about-text p{margin:0; color:var(--muted); line-height:1.78; font-size:16px}
+
+    .facts{display:grid; grid-template-columns: 1fr 1fr; gap:12px}
+    .fact{
+      border-radius: 18px; padding:14px 14px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+    .fact:hover{transform: translateY(-2px); border-color: rgba(255,255,255,.22); background: rgba(255,255,255,.08)}
+    .fact .k{color:var(--muted2); font-size:12px; font-weight:800; letter-spacing:.2px}
+    .fact .v{margin-top:6px; font-weight:900}
+
+    .skills{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:12px;
+    }
+    .skill{
+      border-radius: 20px;
+      padding:16px;
+      position:relative;
+      overflow:hidden;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+    .skill:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(180px 140px at 20% 20%, rgba(124,58,237,.18), transparent 60%),
+        radial-gradient(180px 140px at 80% 80%, rgba(34,197,94,.12), transparent 60%);
+      opacity:.9;
+      z-index:0;
+    }
+    .skill:hover{transform: translateY(-2px); border-color: rgba(255,255,255,.22); background: rgba(255,255,255,.08)}
+    .skill > *{position:relative; z-index:1}
+    .skill-top{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:12px}
+    .badge{
+      font-size:12px;
+      font-weight:900;
+      color:rgba(255,255,255,.86);
+      padding:7px 10px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+    }
+    .skill h3{margin:0; font-size:16px; letter-spacing:-.2px}
+    .bar{
+      height:10px; border-radius:999px;
+      background: rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.12);
+      overflow:hidden;
+    }
+    .fill{
+      height:100%; border-radius:999px;
+      background: linear-gradient(90deg, rgba(124,58,237,1), rgba(34,197,94,1));
+      width:70%;
+      transform-origin:left;
+      transform: scaleX(.7);
+      transition: transform .9s cubic-bezier(.2,.8,.2,1);
+    }
+    .reveal.show .fill{transform: scaleX(1);}
+
+    /* projects */
+    .projects{display:grid; grid-template-columns: repeat(3, 1fr); gap:12px}
+    .project{
+      border-radius: 22px;
+      padding:18px;
+      position:relative;
+      overflow:hidden;
+      min-height: 230px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease, box-shadow .18s ease;
+    }
+    .project:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(240px 180px at 20% 20%, rgba(124,58,237,.18), transparent 62%),
+        radial-gradient(240px 180px at 80% 80%, rgba(34,197,94,.14), transparent 62%);
+      z-index:0;
+    }
+    .project > *{position:relative; z-index:1}
+    .project:hover{
+      transform: translateY(-3px);
+      border-color: rgba(255,255,255,.24);
+      background: rgba(255,255,255,.08);
+      box-shadow: 0 18px 46px rgba(0,0,0,.34);
+    }
+    .project .top{display:flex; align-items:flex-start; justify-content:space-between; gap:10px; margin-bottom:12px}
+    .project h3{margin:0; font-size:18px; letter-spacing:-.25px}
+    .project p{margin:10px 0 0; color:var(--muted); line-height:1.72}
+    .tags{display:flex; gap:8px; flex-wrap:wrap; margin-top:12px}
+    .tag{
+      font-size:12px; font-weight:800; color:rgba(234,240,255,.86);
+      padding:7px 10px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+    }
+    .project .actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
+
+    /* timeline */
+    .split{display:grid; grid-template-columns: 1fr 1fr; gap:12px}
+    .timeline h3{margin:0 0 10px; font-size:18px}
+    .item{
+      padding:14px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+      margin-bottom:10px;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+    .item:hover{transform: translateY(-2px); border-color: rgba(255,255,255,.22); background: rgba(255,255,255,.08)}
+    .item .t{display:flex; align-items:center; justify-content:space-between; gap:10px}
+    .item .t strong{font-size:14px}
+    .item .t span{font-size:12px; color:var(--muted2); font-weight:800}
+    .item p{margin:8px 0 0; color:var(--muted); line-height:1.72}
+
+    /* contact */
+    .contact{display:grid; grid-template-columns: 1.05fr .95fr; gap:12px}
+    form{display:grid; gap:10px}
+    .field{display:grid; gap:8px}
+    label{font-size:12px; color:var(--muted2); font-weight:900; letter-spacing:.2px}
+
+    input, textarea{
+      width:100%;
+      padding:12px 12px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.18);
+      color:var(--text);
+      font:inherit;
+      outline:none;
+      transition: border-color .15s ease, background .15s ease, box-shadow .15s ease;
+    }
+    textarea{min-height:120px; resize:vertical}
+    input:focus, textarea:focus{border-color: rgba(124,58,237,.62); background: rgba(0,0,0,.24); box-shadow: var(--ring)}
+    input::placeholder, textarea::placeholder{color: rgba(234,240,255,.40)}
+
+    .contact-card{border-radius:22px; padding:18px}
+    .contact-list{display:grid; gap:10px}
+    .contact-row{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      padding:12px 12px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+    .contact-row:hover{transform: translateY(-2px); border-color: rgba(255,255,255,.22); background: rgba(255,255,255,.08)}
+    .contact-row .l{display:flex; align-items:center; gap:10px}
+    .ico{
+      width:40px;height:40px;border-radius:14px;
+      display:grid; place-items:center;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      font-weight:900;
+      letter-spacing:.3px;
+    }
+    .contact-row .name{font-weight:900}
+    .contact-row .val{color:var(--muted); font-weight:800; font-size:13px}
+
+    /* toast */
+    .toast{
+      position:fixed;
+      right:16px;
+      bottom:16px;
+      z-index:999;
+      padding:12px 14px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(10,12,22,.75);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 18px 55px rgba(0,0,0,.40);
+      color: var(--text);
+      display:none;
+      max-width:min(360px, calc(100% - 32px));
+    }
+    .toast.show{display:block; animation: pop .25s ease}
+    @keyframes pop{from{transform:translateY(10px); opacity:.0} to{transform:translateY(0); opacity:1}}
+
+    /* footer */
+    footer{
+      padding:30px 0 44px;
+      border-top:1px solid rgba(255,255,255,.10);
+      color:var(--muted);
+    }
+    .foot{display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap}
+    .social{display:flex; gap:10px; flex-wrap:wrap}
+    .social a{
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+    .social a:hover{transform: translateY(-1px); border-color: rgba(255,255,255,.22); background: rgba(255,255,255,.08)}
+    .social a:focus-visible{outline:none; box-shadow: var(--ring);}
+
+    /* reveal */
+    .reveal{opacity:0; transform: translateY(10px); transition: opacity .6s ease, transform .6s ease}
+    .reveal.show{opacity:1; transform: translateY(0)}
+
+    /* motion accessibility */
+    @media (prefers-reduced-motion: reduce){
+      html{scroll-behavior:auto}
+      *{transition:none !important; animation:none !important}
+      .reveal{opacity:1; transform:none}
+      .fill{transform: scaleX(1)}
+    }
+
+    /* responsive */
+    @media (max-width: 980px){
+      h1{font-size:44px}
+      .hero-grid{grid-template-columns:1fr}
+      .grid2{grid-template-columns:1fr}
+      .skills{grid-template-columns: repeat(2, 1fr)}
+      .projects{grid-template-columns:1fr}
+      .split{grid-template-columns:1fr}
+      .contact{grid-template-columns:1fr}
+      .nav-links{display:none}
+    }
+    @media (max-width: 520px){
+      .container{width:min(var(--max), calc(100% - 28px))}
+      h1{font-size:38px}
+      .skills{grid-template-columns:1fr}
+      .facts{grid-template-columns:1fr}
+      .mini-grid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#top">Перейти к содержанию</a>
+  <div class="progress" id="progress"></div>
+
+  <header class="nav" aria-label="Навигация сайта">
+    <div class="container">
+      <div class="nav-wrap">
+        <a class="brand" href="#top" aria-label="Перейти в начало">
+          <span class="logo" aria-hidden="true"></span>
+          <span>Қанатұлы Қуат</span>
+        </a>
+
+        <nav class="nav-links" aria-label="Разделы">
+          <a href="#about">Обо мне</a>
+          <a href="#skills">Навыки</a>
+          <a href="#projects">Проекты</a>
+          <a href="#edu">Образование</a>
+          <a href="#contact">Контакты</a>
+        </nav>
+
+        <div class="nav-actions">
+          <a class="btn ghost" href="#contact">Связаться</a>
+          <a class="btn primary" href="cv.pdf" download>Скачать CV</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-left glass reveal">
+            <div class="kicker">
+              <span class="pill"><span class="dot" aria-hidden="true"></span> Open to work</span>
+              <span class="pill"><span class="dot purple" aria-hidden="true"></span> Kazakhstan • Remote</span>
+              <span class="pill"><span class="dot blue" aria-hidden="true"></span> Frontend • HTML/CSS</span>
+            </div>
+
+            <h1>Здравствуйте, меня зовут <span class="grad">Қанатұлы Қуат</span></h1>
+            <p class="subtitle">
+              Делаю аккуратные, быстрые и адаптивные сайты. Люблю чистую вёрстку, понятный дизайн и работать по макету Figma → HTML/CSS.
+            </p>
+
+            <div class="hero-ctas">
+              <a class="btn primary" href="#projects">Мои проекты</a>
+              <a class="btn" href="#contact">Написать мне</a>
+              <a class="btn" href="#skills">Навыки</a>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="meta-row">
+              <span class="pill">Фокус: лендинги, UI, адаптив</span>
+              <span class="pill">Цель: Junior Frontend</span>
+              <span class="pill">Портфолио: 2026</span>
+            </div>
+          </div>
+
+          <aside class="hero-right glass reveal" aria-label="Карточка профиля">
+            <div class="avatar">
+              <div class="avatar-inner" aria-label="Аватар">
+                <div class="initials">IF</div>
+              </div>
+              <div class="hint" style="margin-top:10px">
+                Совет: вместо IF можно поставить фото (img) или SVG-аватар.
+              </div>
+            </div>
+
+            <div class="mini-grid">
+              <div class="mini glass">
+                <h4>Сильная сторона</h4>
+                <p>Адаптив + аккуратный UI</p>
+              </div>
+              <div class="mini glass">
+                <h4>Сейчас изучаю</h4>
+                <p>JS + GitHub Flow</p>
+              </div>
+              <div class="mini glass">
+                <h4>Формат</h4>
+                <p>Удалёнка / Проекты</p>
+              </div>
+              <div class="mini glass">
+                <h4>Контакт</h4>
+                <p>Telegram / Email</p>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <h2>Обо мне</h2>
+            <p>Коротко: пишу на C++ и интересуюсь программированием. В вебе люблю “дорогой” UI и точную вёрстку.</p>
+          </div>
+          <span class="pill">Figma → HTML/CSS</span>
+        </div>
+
+        <div class="grid2">
+          <div class="card glass reveal about-text">
+            <p>
+              Я студент и начинающий веб-разработчик. Собираю портфолио и делаю современные лендинги.
+              Умею работать по макету, верстаю чисто и адаптивно. Люблю, когда всё выглядит “дорого”:
+              ровные отступы, аккуратные шрифты, правильная сетка.
+              Сейчас прокачиваю CSS (Grid/Flex), типографику и базовый JavaScript.
+            </p>
+          </div>
+
+          <div class="card glass reveal">
+            <div class="facts">
+              <div class="fact">
+                <div class="k">Город</div>
+                <div class="v">Астана</div>
+              </div>
+              <div class="fact">
+                <div class="k">Роль</div>
+                <div class="v">Junior Frontend/Backend</div>
+              </div>
+              <div class="fact">
+                <div class="k">Языки</div>
+                <div class="v">KZ / RU / EN</div>
+              </div>
+              <div class="fact">
+                <div class="k">Формат</div>
+                <div class="v">Remote / Part-time</div>
+              </div>
+              <div class="fact">
+                <div class="k">Цель</div>
+                <div class="v">Первые заказы</div>
+              </div>
+              <div class="fact">
+                <div class="k">Интерес</div>
+                <div class="v">UI + Web</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <h2>Навыки</h2>
+            <p>Более 20 сертификатов на Stepik и других онлайн платформах. Ниже — мой текущий стек.</p>
+          </div>
+          <span class="pill">Clean UI</span>
+        </div>
+
+        <div class="skills">
+          <div class="skill glass reveal">
+            <div class="skill-top"><h3>HTML</h3><span class="badge">Strong</span></div>
+            <div class="bar" aria-label="HTML уровень"><div class="fill" style="width:88%"></div></div>
+          </div>
+
+          <div class="skill glass reveal">
+            <div class="skill-top"><h3>CSS</h3><span class="badge">Strong</span></div>
+            <div class="bar" aria-label="CSS уровень"><div class="fill" style="width:84%"></div></div>
+          </div>
+
+          <div class="skill glass reveal">
+            <div class="skill-top"><h3>Flexbox / Grid</h3><span class="badge">Confident</span></div>
+            <div class="bar" aria-label="Grid/Flex уровень"><div class="fill" style="width:78%"></div></div>
+          </div>
+
+          <div class="skill glass reveal">
+            <div class="skill-top"><h3>Responsive</h3><span class="badge">Confident</span></div>
+            <div class="bar" aria-label="Responsive уровень"><div class="fill" style="width:76%"></div></div>
+          </div>
+
+          <div class="skill glass reveal">
+            <div class="skill-top"><h3>Figma</h3><span class="badge">Good</span></div>
+            <div class="bar" aria-label="Figma уровень"><div class="fill" style="width:70%"></div></div>
+          </div>
+
+          <div class="skill glass reveal">
+            <div class="skill-top"><h3>Git / GitHub</h3><span class="badge">Good</span></div>
+            <div class="bar" aria-label="Git уровень"><div class="fill" style="width:62%"></div></div>
+          </div>
+
+          <div class="skill glass reveal">
+            <div class="skill-top"><h3>JavaScript (basic)</h3><span class="badge">Learning</span></div>
+            <div class="bar" aria-label="JS уровень"><div class="fill" style="width:46%"></div></div>
+          </div>
+
+          <div class="skill glass reveal">
+            <div class="skill-top"><h3>UX / Typography</h3><span class="badge">Good</span></div>
+            <div class="bar" aria-label="UX уровень"><div class="fill" style="width:64%"></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <h2>Проекты</h2>
+            <p>Готовые работы. Нажми “Скопировать ссылку” — и она будет в буфере.</p>
+          </div>
+          <span class="pill">Done ✅</span>
+        </div>
+
+        <div class="projects">
+          <article class="project glass reveal">
+            <div>
+              <div class="top">
+                <h3>Portfolio Landing</h3>
+                <span class="pill"><span class="dot purple" aria-hidden="true"></span> Completed</span>
+              </div>
+              <p>Лендинг-портфолио: hero, навыки, проекты, контакты. Адаптив и чистая сетка.</p>
+              <div class="tags">
+                <span class="tag">HTML</span>
+                <span class="tag">CSS</span>
+                <span class="tag">Responsive</span>
+                <span class="tag">Grid</span>
+              </div>
+            </div>
+            <div class="actions">
+              <a class="btn small" target="_blank" rel="noreferrer" href="https://github.com/DizzDer">Code</a>
+              <a class="btn primary small" target="_blank" rel="noreferrer" href="https://github.com/DizzDer/Async-price-tracker-" data-demo>Live Demo</a>
+              <button class="btn small" type="button" data-copy="https://github.com/DizzDer/Async-price-tracker-">Скопировать ссылку</button>
+            </div>
+          </article>
+
+          <article class="project glass reveal">
+            <div>
+              <div class="top">
+                <h3>ToDo UI</h3>
+                <span class="pill"><span class="dot" aria-hidden="true"></span> Completed</span>
+              </div>
+              <p>UI списка задач: статусы, фильтры, hover-анимации, аккуратные компоненты.</p>
+              <div class="tags">
+                <span class="tag">CSS</span>
+                <span class="tag">Flexbox</span>
+                <span class="tag">UI</span>
+                <span class="tag">Components</span>
+              </div>
+            </div>
+            <div class="actions">
+              <a class="btn small" target="_blank" rel="noreferrer" href="https://github.com/DizzDer">Code</a>
+              <a class="btn primary small" target="_blank" rel="noreferrer" href="https://github.com/DizzDer/Async-price-tracker-" data-demo>Live Demo</a>
+              <button class="btn small" type="button" data-copy="https://github.com/DizzDer/Async-price-tracker-">Скопировать ссылку</button>
+            </div>
+          </article>
+
+          <article class="project glass reveal">
+            <div>
+              <div class="top">
+                <h3>Product Cards</h3>
+                <span class="pill"><span class="dot blue" aria-hidden="true"></span> Completed</span>
+              </div>
+              <p>Сетка карточек товара: бейджи, цена, CTA-кнопки, эффекты наведения.</p>
+              <div class="tags">
+                <span class="tag">Grid</span>
+                <span class="tag">Animations</span>
+                <span class="tag">UI</span>
+                <span class="tag">Layout</span>
+              </div>
+            </div>
+            <div class="actions">
+              <a class="btn small" target="_blank" rel="noreferrer" href="https://github.com/DizzDer">Code</a>
+              <a class="btn primary small" target="_blank" rel="noreferrer" href="https://github.com/DizzDer/ToDo-App-in-con" data-demo>Live Demo</a>
+              <button class="btn small" type="button" data-copy="https://github.com/DizzDer/ToDo-App-in-con">Скопировать ссылку</button>
+            </div>
+          </article>
+
+          <article class="project glass reveal">
+            <div>
+              <div class="top">
+                <h3>Business Landing</h3>
+                <span class="pill"><span class="dot purple" aria-hidden="true"></span> Completed</span>
+              </div>
+              <p>Лендинг сервиса: преимущества, тарифы, отзывы, FAQ. Полный адаптив.</p>
+              <div class="tags">
+                <span class="tag">HTML</span>
+                <span class="tag">CSS</span>
+                <span class="tag">UI</span>
+                <span class="tag">Responsive</span>
+              </div>
+            </div>
+            <div class="actions">
+              <a class="btn small" target="_blank" rel="noreferrer" href="https://github.com/DizzDer">Code</a>
+              <a class="btn primary small" target="_blank" rel="noreferrer" href="https://github.com/DizzDer/ToDo-App-in-con" data-demo>Live Demo</a>
+              <button class="btn small" type="button" data-copy="https://github.com/DizzDer/ToDo-App-in-con">Скопировать ссылку</button>
+            </div>
+          </article>
+
+          <article class="project glass reveal">
+            <div>
+              <div class="top">
+                <h3>Pricing + FAQ</h3>
+                <span class="pill"><span class="dot" aria-hidden="true"></span> Completed</span>
+              </div>
+              <p>Страница с тарифами и FAQ: карточки, акценты, читаемая структура.</p>
+              <div class="tags">
+                <span class="tag">Typography</span>
+                <span class="tag">Grid</span>
+                <span class="tag">UI</span>
+                <span class="tag">CSS</span>
+              </div>
+            </div>
+            <div class="actions">
+              <a class="btn small" target="_blank" rel="noreferrer" href="https://github.com/DizzDer">Code</a>
+              <a class="btn primary small" target="_blank" rel="noreferrer" href="https://github.com/DizzDer/ToDo-App-in-con" data-demo>Live Demo</a>
+              <button class="btn small" type="button" data-copy="https://github.com/DizzDer/ToDo-App-in-con">Скопировать ссылку</button>
+            </div>
+          </article>
+
+          <article class="project glass reveal">
+            <div>
+              <div class="top">
+                <h3>Auth UI Kit</h3>
+                <span class="pill"><span class="dot blue" aria-hidden="true"></span> Completed</span>
+              </div>
+              <p>Набор экранов авторизации: логин/регистрация/reset password + адаптив.</p>
+              <div class="tags">
+                <span class="tag">Forms</span>
+                <span class="tag">UI Kit</span>
+                <span class="tag">Flexbox</span>
+                <span class="tag">Responsive</span>
+              </div>
+            </div>
+            <div class="actions">
+              <a class="btn small" target="_blank" rel="noreferrer" href="https://github.com/DizzDer">Code</a>
+              <a class="btn primary small" target="_blank" rel="noreferrer" href="https://github.com/DizzDer/Auth-UI-Kit" data-demo>Live Demo</a>
+              <button class="btn small" type="button" data-copy="https://github.com/DizzDer/Auth-UI-Kit">Скопировать ссылку</button>
+            </div>
+          </article>
+        </div>
+
+        <div class="divider"></div>
+        <div class="hint" style="margin-top:12px">
+        </div>
+      </div>
+    </section>
+
+    <section id="edu" class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <h2>Образование и опыт</h2>
+            <p>Путь развития: база → практика → портфолио. Сейчас упор на веб и качество UI.</p>
+          </div>
+          <span class="pill">Growth</span>
+        </div>
+
+        <div class="split">
+          <div class="card glass timeline reveal">
+            <h3>Образование</h3>
+            <div class="item">
+              <div class="t">
+                <strong>Университет</strong>
+                <span>2024 — 2028</span>
+              </div>
+              <p>Специальность: IT / Программирование / Информационные системы.</p>
+            </div>
+            <div class="item">
+              <div class="t">
+                <strong>Самообучение</strong>
+                <span>2025 — 2026</span>
+              </div>
+              <p>HTML/CSS, адаптивная вёрстка, основы Git, работа с Figma.</p>
+            </div>
+          </div>
+
+          <div class="card glass timeline reveal">
+            <h3>Опыт</h3>
+            <div class="item">
+              <div class="t">
+                <strong>Учебные проекты</strong>
+                <span>2025 — сейчас</span>
+              </div>
+              <p>Собираю портфолио, делаю лендинги, практикую дизайн-систему и верстаю по макетам.</p>
+            </div>
+            <div class="item">
+              <div class="t">
+                <strong>Практика / Фриланс</strong>
+                <span>по желанию</span>
+              </div>
+              <p>Верстка, UI-правки, адаптив под мобилку и “доведение до идеала”.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <h2>Контакты</h2>
+            <p>nickname: DizzDer (all platforms)</p>
+          </div>
+          <span class="pill">Let’s work</span>
+        </div>
+
+        <div class="contact">
+          <div class="card glass reveal">
+            <form id="contactForm" autocomplete="on">
+              <div class="field">
+                <label for="name">Имя</label>
+                <input id="name" name="name" type="text" placeholder="Как к тебе обращаться" required />
+              </div>
+              <div class="field">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" placeholder="example@mail.com" required />
+              </div>
+              <div class="field">
+                <label for="msg">Сообщение</label>
+                <textarea id="msg" name="message" placeholder="Привет! Хочу обсудить проект..." required></textarea>
+              </div>
+              <div style="display:flex; gap:10px; flex-wrap:wrap">
+                <button class="btn primary" type="submit">Скопировать сообщение</button>
+                <a class="btn" href="#top">Наверх</a>
+              </div>
+              <div class="hint">Отправка сделана без сервера: форма копирует текст в буфер. Для реальной отправки подключи Formspree/Backend.</div>
+            </form>
+          </div>
+
+          <aside class="contact-card glass reveal">
+            <div class="contact-list">
+              <div class="contact-row">
+                <div class="l">
+                  <div class="ico">TG</div>
+                  <div>
+                    <div class="name">Telegram</div>
+                    <div class="val">@DizzDer</div>
+                  </div>
+                </div>
+                <a class="btn small" href="https://t.me/DizzDer" target="_blank" rel="noreferrer">Открыть</a>
+              </div>
+
+              <div class="contact-row">
+                <div class="l">
+                  <div class="ico">@</div>
+                  <div>
+                    <div class="name">Email</div>
+                    <div class="val">boyskuattous@icloud.com</div>
+                  </div>
+                </div>
+                <a class="btn small" href="mailto:boyskuattous@icloud.com">Написать</a>
+              </div>
+
+              <div class="contact-row">
+                <div class="l">
+                  <div class="ico">GH</div>
+                  <div>
+                    <div class="name">GitHub</div>
+                    <div class="val">github.com/DizzDer</div>
+                  </div>
+                </div>
+                <a class="btn small" href="https://github.com/DizzDer" target="_blank" rel="noreferrer">Профиль</a>
+              </div>
+
+              <div class="contact-row">
+                <div class="l">
+                  <div class="ico">IN</div>
+                  <div>
+                    <div class="name">Linktree</div>
+                    <div class="val">linktr.ee/DizzDer</div>
+                  </div>
+                </div>
+                <a class="btn small" href="https://linktr.ee/DizzDer" target="_blank" rel="noreferrer">Профиль</a>
+              </div>
+
+              <div class="card glass" style="padding:16px; border-radius:18px">
+                <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap">
+                  <div>
+                    <div style="font-weight:900; letter-spacing:-.2px">Готов к задачам</div>
+                    <div class="hint">Лендинг • Верстка • Адаптив • Правки UI</div>
+                  </div>
+                  <span class="pill"><span class="dot" aria-hidden="true"></span> Online</span>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <div class="foot">
+          <div style="display:flex; align-items:center; gap:10px">
+            <span class="logo" style="width:28px;height:28px;border-radius:10px" aria-hidden="true"></span>
+            <div>© <span id="y"></span> Қанатұлы Қуат. Все права защищены.</div>
+          </div>
+          <div class="social" aria-label="Соцсети">
+            <a href="https://t.me/DizzDer" target="_blank" rel="noreferrer">Telegram</a>
+            <a href="https://github.com/DizzDer" target="_blank" rel="noreferrer">GitHub</a>
+            <a href="mailto:boyskuattous@icloud.com">Email</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+
+    const progress = document.getElementById("progress");
+    const onScroll = () => {
+      const h = document.documentElement;
+      const max = h.scrollHeight - h.clientHeight;
+      const p = max > 0 ? (h.scrollTop / max) * 100 : 0;
+      progress.style.width = p.toFixed(2) + "%";
+    };
+    document.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+
+    const revealEls = Array.from(document.querySelectorAll(".reveal"));
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) {
+        if (e.isIntersecting) e.target.classList.add("show");
+      }
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => io.observe(el));
+
+    const navLinks = Array.from(document.querySelectorAll(".nav-links a"));
+    const sections = navLinks
+      .map(a => document.querySelector(a.getAttribute("href")))
+      .filter(Boolean);
+
+    const ioNav = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const id = "#" + entry.target.id;
+        navLinks.forEach(a => a.classList.toggle("active", a.getAttribute("href") === id));
+      });
+    }, { rootMargin: "-45% 0px -50% 0px", threshold: 0.01 });
+
+    sections.forEach(s => ioNav.observe(s));
+
+    const toast = document.getElementById("toast");
+    let toastTimer = null;
+    const showToast = (text) => {
+      toast.textContent = text;
+      toast.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove("show"), 2200);
+    };
+
+    document.querySelectorAll("[data-copy]").forEach(btn => {
+      btn.addEventListener("click", async () => {
+        const url = btn.getAttribute("data-copy") || "#";
+        try{
+          await navigator.clipboard.writeText(url);
+          showToast("Ссылка скопирована ✅");
+        }catch{
+          showToast("Не удалось скопировать 😅");
+        }
+      });
+    });
+
+    const form = document.getElementById("contactForm");
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const msg = document.getElementById("msg").value.trim();
+      const text =
+`Имя: ${name}
+Email: ${email}
+
+Сообщение:
+${msg}`;
+      try{
+        await navigator.clipboard.writeText(text);
+        showToast("Сообщение скопировано ✅");
+      }catch{
+        showToast("Не удалось скопировать 😅");
+      }
+    });
+  </script>
+</body>
+</html>
