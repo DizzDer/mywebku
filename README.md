@@ -3,7 +3,7 @@
 # Portfolio — Қанатұлы Қуат  
 Junior Frontend Developer • Responsive • Figma → HTML/CSS
 
-<a href="https://YOUR-USERNAME.github.io/YOUR-REPO/" target="_blank"><b>🌐 Live Demo</b></a>
+<a href="https://dizzder.github.io/mywebku/" target="_blank"><b>🌐 Live Demo</b></a>
 &nbsp;•&nbsp;
 <a href="#-установка-и-запуск"><b>🚀 Запуск</b></a>
 &nbsp;•&nbsp;
