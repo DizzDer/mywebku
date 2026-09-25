@@ -3,7 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#03000D" />
+  <meta name="theme-color" content="#0d0d12" />
+  <link rel="canonical" href="https://dizzder.github.io/mywebku/">
+  <meta property="og:url" content="https://dizzder.github.io/mywebku/">
   <meta name="description" content="Портфолио DizzDer — Junior Frontend. Адаптивные сайты, чистая вёрстка, Figma → HTML/CSS." />
   <title>DizzDer — Frontend-разработчик · Астана</title>
   <meta property="og:title" content="DizzDer — Frontend-разработчик">
@@ -1582,6 +1584,13 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible 
 @media(prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none!important; transition:none!important; scroll-behavior:auto!important; } }
 
 </style>
+<style>
+.project-visual { height:180px; margin:-25px -25px 24px; padding:22px; overflow:hidden; border-bottom:1px solid var(--border); border-radius:9px 9px 0 0; text-align:left; }
+.project-index { font:10px 'Space Mono',monospace; color:var(--muted); margin-bottom:14px; letter-spacing:1px; }
+.preview-mini-nav { display:flex; justify-content:space-between; font:9px monospace; margin-bottom:16px; }.portfolio { background:#dba3b2; color:#26202a; }.portfolio strong { font:700 31px/.98 Arial,sans-serif; letter-spacing:-1px; }.portfolio strong span { color:#855165; }.portfolio>i { display:block; font:7px monospace; letter-spacing:2px; margin-top:13px; }.tracker { background:#b9cbb9; color:#20372e; }.preview-chart { height:90px; display:flex; align-items:end; gap:12px; border-bottom:1px solid #36523d40; padding:0 12px; }.preview-chart i { flex:1; background:#365d48; height:80%; border-radius:3px 3px 0 0; }.preview-chart i:nth-child(2n) { height:60%; }.preview-chart i:nth-child(3n) { height:35%; }.preview-chart i:last-child { height:23%; }.preview-code { font:9px monospace; display:block; margin-top:12px; }.terminal { background:#232631; color:#d6d9e5; }.terminal-lines { font:12px/1.8 monospace; }.terminal-lines span,.terminal-lines b { color:#b9cbb9; }
+.project { overflow:hidden; }.project .actions { margin-top:20px; gap:8px; }.project .actions .btn { font-size:11px; }.stats .stat:last-child .n { font-size:18px; line-height:38px; }.contact-grid .hintline { flex-wrap:wrap; }.contact-grid .hintline .pill { white-space:normal; line-height:1.6; }[aria-invalid="true"] { border-color:#df526b; }.about-pane:focus-visible { outline:2px solid var(--sakura); outline-offset:5px; }
+@media(max-width:700px) { .project-visual { margin:-22px -22px 24px; height:200px; }.portfolio strong { font-size:36px; } }
+</style>
 </head>
 
 <body>
@@ -1821,16 +1830,16 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible 
 
               <div class="stats">
                 <div class="stat">
-                  <div class="n" data-count="20">0</div>
+                  <div class="n" data-count="20">20</div>
                   <div class="t">сертификатов</div>
                 </div>
                 <div class="stat">
-                  <div class="n" data-count="6">0</div>
+                  <div class="n" data-count="3">3</div>
                   <div class="t">проектов</div>
                 </div>
                 <div class="stat">
-                  <div class="n" data-count="100">0</div>
-                  <div class="t">% качество</div>
+                  <div class="n">KZ / RU / EN</div>
+                  <div class="t">языки общения</div>
                 </div>
               </div>
             </div>
@@ -1929,7 +1938,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible 
             <div>
               <span class="sec-num mono">// 03 — ПРОЕКТЫ</span>
               <h2>Проекты</h2>
-              <p>Практика в коде: лендинги, компоненты и интерфейсы.</p>
+              <p>Веб, серверная разработка и C++. Три проекта с открытым исходным кодом.</p>
             </div>
             <span class="anime-badge">✅ Done</span>
           </div>
@@ -1944,8 +1953,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible 
             <div class="tabs" role="tablist" aria-label="Фильтр проектов">
               <button class="tab active" type="button" data-ptab="all" role="tab" aria-selected="true">Все</button>
               <button class="tab" type="button" data-ptab="landing" role="tab" aria-selected="false">Landing</button>
-              <button class="tab" type="button" data-ptab="ui" role="tab" aria-selected="false">UI</button>
-              <button class="tab" type="button" data-ptab="auth" role="tab" aria-selected="false">Auth</button>
+              <button class="tab" type="button" data-ptab="backend" role="tab" aria-selected="false">Backend</button>
+              <button class="tab" type="button" data-ptab="cpp" role="tab" aria-selected="false">C++</button>
             </div>
             <div class="toolbar-right">
               <input class="search" id="projectSearch" type="search" placeholder="Поиск по проектам..." aria-label="Поиск по проектам">
@@ -1955,117 +1964,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible 
             </div>
           </div>
 
-          <p id="projectEmpty" class="empty-state" role="status" hidden>Ничего не найдено. Попробуй другой запрос или выбери «Все».</p><div class="projects-grid" id="projectsGrid">
-            <article class="project reveal d1" data-cat="landing">
-              <div>
-                <div class="top">
-                  <h3>Portfolio Landing</h3>
-                  <span class="pill"><span class="dot v" aria-hidden="true"></span> Done</span>
-                </div>
-                <p>Лендинг-портфолио: hero, навыки, проекты, контакты. Адаптив и чистая сетка.</p>
-                <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">Responsive</span><span class="tag">Grid</span></div>
-              </div>
-              <div class="actions">
-                <button class="btn sm ghost fav-btn" type="button">★</button>
-                <a class="btn sm" target="_blank" rel="noreferrer" href="https://github.com/DizzDer/mywebku">Code</a>
-                <a class="btn primary sm" target="_blank" rel="noreferrer" href="https://github.com/DizzDer/mywebku" data-demo>Репозиторий ↗</a>
-                <button class="btn sm" type="button" data-preview>Подробнее</button>
-                <button class="btn sm ghost" type="button" data-copy="https://github.com/DizzDer/mywebku">Копировать</button>
-              </div>
-            </article>
-
-            <article class="project reveal d2" data-cat="ui">
-              <div>
-                <div class="top">
-                  <h3>ToDo UI</h3>
-                  <span class="pill"><span class="dot" aria-hidden="true"></span> Done</span>
-                </div>
-                <p>UI списка задач: статусы, фильтры, hover-анимации, аккуратные компоненты.</p>
-                <div class="tags"><span class="tag">CSS</span><span class="tag">Flexbox</span><span class="tag">UI</span><span class="tag">Components</span></div>
-              </div>
-              <div class="actions">
-                <button class="btn sm ghost fav-btn" type="button">★</button>
-                <a class="btn sm" target="_blank" rel="noreferrer" href="https://github.com/DizzDer/Async-price-tracker-">Code</a>
-                <a class="btn primary sm" target="_blank" rel="noreferrer" href="https://github.com/DizzDer/Async-price-tracker-" data-demo>Репозиторий ↗</a>
-                <button class="btn sm" type="button" data-preview>Подробнее</button>
-                <button class="btn sm ghost" type="button" data-copy="https://github.com/DizzDer/Async-price-tracker-">Копировать</button>
-              </div>
-            </article>
-
-            <article class="project reveal d3" data-cat="ui">
-              <div>
-                <div class="top">
-                  <h3>Product Cards</h3>
-                  <span class="pill"><span class="dot c" aria-hidden="true"></span> Done</span>
-                </div>
-                <p>Сетка карточек товара: бейджи, цена, CTA-кнопки, эффекты наведения.</p>
-                <div class="tags"><span class="tag">Grid</span><span class="tag">Animations</span><span class="tag">UI</span><span class="tag">Layout</span></div>
-              </div>
-              <div class="actions">
-                <button class="btn sm ghost fav-btn" type="button">★</button>
-                <a class="btn sm" target="_blank" rel="noreferrer" href="https://github.com/DizzDer/ToDo-App-in-con">Code</a>
-                <a class="btn primary sm" target="_blank" rel="noreferrer" href="https://github.com/DizzDer/ToDo-App-in-con" data-demo>Репозиторий ↗</a>
-                <button class="btn sm" type="button" data-preview>Подробнее</button>
-                <button class="btn sm ghost" type="button" data-copy="https://github.com/DizzDer/ToDo-App-in-con">Копировать</button>
-              </div>
-            </article>
-
-            <article class="project reveal d1" data-cat="landing">
-              <div>
-                <div class="top">
-                  <h3>Business Landing</h3>
-                  <span class="pill"><span class="dot v" aria-hidden="true"></span> Done</span>
-                </div>
-                <p>Лендинг сервиса: преимущества, тарифы, отзывы, FAQ. Полный адаптив.</p>
-                <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">UI</span><span class="tag">Responsive</span></div>
-              </div>
-              <div class="actions">
-                <button class="btn sm ghost fav-btn" type="button">★</button>
-                <a class="btn sm" target="_blank" rel="noreferrer" href="https://github.com/DizzDer/ToDo-App-in-con">Code</a>
-                <a class="btn primary sm" target="_blank" rel="noreferrer" href="https://github.com/DizzDer/ToDo-App-in-con" data-demo>Репозиторий ↗</a>
-                <button class="btn sm" type="button" data-preview>Подробнее</button>
-                <button class="btn sm ghost" type="button" data-copy="https://github.com/DizzDer/ToDo-App-in-con">Копировать</button>
-              </div>
-            </article>
-
-            <article class="project reveal d2" data-cat="landing">
-              <div>
-                <div class="top">
-                  <h3>Pricing + FAQ</h3>
-                  <span class="pill"><span class="dot" aria-hidden="true"></span> Done</span>
-                </div>
-                <p>Страница с тарифами и FAQ: карточки, акценты, читаемая структура.</p>
-                <div class="tags"><span class="tag">Typography</span><span class="tag">Grid</span><span class="tag">UI</span><span class="tag">CSS</span></div>
-              </div>
-              <div class="actions">
-                <button class="btn sm ghost fav-btn" type="button">★</button>
-                <a class="btn sm" target="_blank" rel="noreferrer" href="https://github.com/DizzDer/ToDo-App-in-con">Code</a>
-                <a class="btn primary sm" target="_blank" rel="noreferrer" href="https://github.com/DizzDer/ToDo-App-in-con" data-demo>Репозиторий ↗</a>
-                <button class="btn sm" type="button" data-preview>Подробнее</button>
-                <button class="btn sm ghost" type="button" data-copy="https://github.com/DizzDer/ToDo-App-in-con">Копировать</button>
-              </div>
-            </article>
-
-            <article class="project reveal d3" data-cat="auth">
-              <div>
-                <div class="top">
-                  <h3>Auth UI Kit</h3>
-                  <span class="pill"><span class="dot c" aria-hidden="true"></span> Done</span>
-                </div>
-                <p>Набор экранов авторизации: логин/регистрация/reset password + адаптив.</p>
-                <div class="tags"><span class="tag">Forms</span><span class="tag">UI Kit</span><span class="tag">Flexbox</span><span class="tag">Responsive</span></div>
-              </div>
-              <div class="actions">
-                <button class="btn sm ghost fav-btn" type="button">★</button>
-                <a class="btn sm" target="_blank" rel="noreferrer" href="https://github.com/DizzDer/Auth-UI-Kit">Code</a>
-                <a class="btn primary sm" target="_blank" rel="noreferrer" href="https://github.com/DizzDer/Auth-UI-Kit" data-demo>Репозиторий ↗</a>
-                <button class="btn sm" type="button" data-preview>Подробнее</button>
-                <button class="btn sm ghost" type="button" data-copy="https://github.com/DizzDer/Auth-UI-Kit">Копировать</button>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
+          <p id="projectEmpty" class="empty-state" role="status" hidden>Ничего не найдено. Попробуй другой запрос или выбери «Все».</p><div class="projects-grid" id="projectsGrid"><article class="project reveal" data-cat="landing"><div class="project-visual portfolio" aria-hidden="true"><span class="preview-mini-nav">DizzDer <span>PORTFOLIO</span></span><strong>Идеи.<br>Код. Детали<span>.</span></strong><i>FRONTEND DEVELOPMENT ↗</i></div><div><div class="project-index">01 / WEB</div><div class="top"><h3>Portfolio Landing</h3></div><p>Личное портфолио: адаптивная сетка, светлая и тёмная темы, поиск проектов и форма связи.</p><div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div></div><div class="actions"><button class="btn sm ghost fav-btn" type="button">★</button><a class="btn sm" target="_blank" rel="noreferrer" href="https://github.com/DizzDer/mywebku">Code</a><a class="btn primary sm" target="_blank" rel="noreferrer" href="https://github.com/DizzDer/mywebku" data-demo>Репозиторий ↗</a><button class="btn sm" type="button" data-preview>Подробнее</button></div></article>
+<article class="project reveal" data-cat="backend"><div class="project-visual tracker" aria-hidden="true"><span class="preview-mini-nav">PRICE TRACKER <span>API</span></span><div class="preview-chart"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span class="preview-code">product → history → alert</span></div><div><div class="project-index">02 / BACKEND</div><div class="top"><h3>Async Price Tracker</h3></div><p>Асинхронный трекер цен: REST API, история стоимости и фоновые задачи. PostgreSQL, Celery и Redis; запуск через Docker.</p><div class="tags"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">PostgreSQL</span><span class="tag">Docker</span></div></div><div class="actions"><button class="btn sm ghost fav-btn" type="button">★</button><a class="btn sm" target="_blank" rel="noreferrer" href="https://github.com/DizzDer/Async-price-tracker-">Code</a><a class="btn primary sm" target="_blank" rel="noreferrer" href="https://github.com/DizzDer/Async-price-tracker-" data-demo>Репозиторий ↗</a><button class="btn sm" type="button" data-preview>Подробнее</button></div></article>
+<article class="project reveal" data-cat="cpp"><div class="project-visual terminal" aria-hidden="true"><span class="preview-mini-nav">● ● ● <span>todo.cpp</span></span><div class="terminal-lines">$ ./todo<br><span>[✓] Создать задачу</span><br>[ ] Расставить приоритеты<br>[ ] Сохранить прогресс<br><b>▍</b></div></div><div><div class="project-index">03 / C++</div><div class="top"><h3>ToDo Task Manager</h3></div><p>Консольный менеджер задач: приоритеты, поиск, статистика и сохранение в файл. Модульная архитектура на основе ООП.</p><div class="tags"><span class="tag">C++</span><span class="tag">STL</span><span class="tag">OOP</span><span class="tag">File I/O</span></div></div><div class="actions"><button class="btn sm ghost fav-btn" type="button">★</button><a class="btn sm" target="_blank" rel="noreferrer" href="https://github.com/DizzDer/ToDo-App-in-con">Code</a><a class="btn primary sm" target="_blank" rel="noreferrer" href="https://github.com/DizzDer/ToDo-App-in-con" data-demo>Репозиторий ↗</a><button class="btn sm" type="button" data-preview>Подробнее</button></div></article></div></div></section>
 
       <!-- ═══════ SERVICES ═══════ -->
       <section id="services" class="section">
@@ -2135,8 +2036,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible 
             </article>
 
             <article class="lab-card reveal d2">
-              <h3>Быстрый статус</h3>
-              <p>Позволяет менять рабочий статус прямо на сайте: available, busy или learning.</p>
+              <h3>Демо статуса</h3>
+              <p>Попробуй переключатель состояний. Это демонстрация интерфейса, а не мой текущий статус.</p>
               <div class="status-row">
                 <button class="btn sm" type="button" data-status="available">Available</button>
                 <button class="btn sm" type="button" data-status="busy">Busy</button>
@@ -2381,15 +2282,15 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible 
               <form id="contactForm" autocomplete="on" novalidate>
                 <div class="field">
                   <label for="name">Имя</label>
-                  <input id="name" name="name" type="text" placeholder="Как к тебе обращаться" required />
+                  <input id="name" name="name" autocomplete="name" maxlength="100" type="text" placeholder="Как к тебе обращаться" required />
                 </div>
                 <div class="field">
                   <label for="email">Email</label>
-                  <input id="email" name="email" type="email" placeholder="example@mail.com" required />
+                  <input id="email" name="email" autocomplete="email" maxlength="254" type="email" placeholder="example@mail.com" required />
                 </div>
                 <div class="field">
                   <label for="msg">Сообщение</label>
-                  <textarea id="msg" name="message" placeholder="Привет! Хочу обсудить проект..." required></textarea>
+                  <textarea id="msg" name="message" minlength="6" maxlength="500" aria-describedby="msgCount" placeholder="Привет! Хочу обсудить проект..." required></textarea>
                   <div class="charline"><span>Пиши коротко и по делу</span><span id="msgCount">0 / 500</span></div>
                 </div>
 
@@ -2712,7 +2613,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible 
       btn.addEventListener('click', () => copyText(btn.getAttribute('data-copy') || '#'));
     });
     $('#copyPortfolioBtn').addEventListener('click', async () => {
-      await copyText(location.href.split('#')[0]);
+      await copyText('https://dizzder.github.io/mywebku/');
     });
 
     /* ═══════════════════════════════════
@@ -2834,6 +2735,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible 
     const sendBtn = $('#sendBtn');
 
     const setSendMode = (mode) => {
+      mode = ['telegram','email','copy'].includes(mode) ? mode : 'telegram';
       sendMode = mode;
       storage.setItem(SEND_KEY, mode);
       sendTabs.forEach(t => {
@@ -2843,10 +2745,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible 
       });
       if (mode === 'telegram') {
         sendHint.innerHTML = '<span class="dot s" aria-hidden="true"></span> Открою Telegram с готовым текстом';
-        sendBtn.textContent = 'Отправить';
+        sendBtn.textContent = mode === 'telegram' ? 'Открыть Telegram' : 'Открыть почту';
       } else if (mode === 'email') {
         sendHint.innerHTML = '<span class="dot v" aria-hidden="true"></span> Открою Email с готовым письмом';
-        sendBtn.textContent = 'Отправить';
+        sendBtn.textContent = mode === 'telegram' ? 'Открыть Telegram' : 'Открыть почту';
       } else {
         sendHint.innerHTML = '<span class="dot c" aria-hidden="true"></span> Скопирую текст в буфер';
         sendBtn.textContent = 'Скопировать';
@@ -2873,7 +2775,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible 
       if (!em || !isEmail(em)) errs.push('Введите корректный email.');
       const msg = ($('#msg').value || '').trim();
       if (!msg || msg.length < 6) errs.push('Сообщение слишком короткое (минимум 6 символов).');
-      if (errs.length) { formErrors.textContent = errs.join(' '); formErrors.classList.add('show'); formOk.classList.remove('show'); return false; }
+      for (const [id, invalid] of [['name', !sanitize($('#name').value)], ['email', !isEmail(em)], ['msg', !msg || msg.length < 6 || msg.length > 500]]) { $('#' + id).setAttribute('aria-invalid', String(invalid)); }
+      if (msg.length > 500) errs.push('Максимум 500 символов.');
+      if (errs.length) { $('#contactForm [aria-invalid="true"]')?.focus(); formErrors.textContent = errs.join(' '); formErrors.classList.add('show'); formOk.classList.remove('show'); return false; }
       formErrors.classList.remove('show'); return true;
     };
 
@@ -2883,8 +2787,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible 
     const doSend = async () => {
       if (!validateForm()) { showToast('Исправь поля формы'); return; }
       const text = buildMessage();
-      if (sendMode === 'telegram') { openTG(text); showToast('Открываю Telegram ✅'); formOk.textContent = 'Telegram открыт в новой вкладке.'; formOk.classList.add('show'); return; }
-      if (sendMode === 'email') { openEM(text); showToast('Открываю Email ✅'); formOk.textContent = 'Email-клиент открыт.'; formOk.classList.add('show'); return; }
+      if (sendMode === 'telegram') { openTG(text); showToast('Открываю Telegram ✅'); formOk.textContent = 'Заверши отправку в Telegram. Если вкладка не открылась, используй прямую ссылку в контактах.'; formOk.classList.add('show'); return; }
+      if (sendMode === 'email') { openEM(text); showToast('Открываю Email ✅'); formOk.textContent = 'Заверши отправку в почтовом приложении. Если оно не открылось, скопируй сообщение.'; formOk.classList.add('show'); return; }
       if (!await copyText(text)) { formOk.classList.remove('show'); return; }
       formOk.textContent = 'Сообщение скопировано в буфер.';
       formOk.classList.add('show');
@@ -2894,6 +2798,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible 
     $('#clearForm').addEventListener('click', () => {
       $('#name').value = ''; $('#email').value = ''; $('#msg').value = '';
       formErrors.classList.remove('show'); formOk.classList.remove('show');
+      $$('#contactForm [aria-invalid]').forEach(el => el.removeAttribute('aria-invalid'));
       syncCount();
       showToast('Очищено 🧼');
     });
@@ -3042,15 +2947,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible 
     /* ═══════════════════════════════════
        AVAILABILITY TEXT
     ═══════════════════════════════════ */
-    const h = new Date().getHours();
-    const availText = $('#availText');
-    const availSub = $('#availSub');
-    if (h >= 0 && h < 6) { availText.textContent = 'Сейчас ночь — отвечу утром'; availSub.textContent = 'Обычно с 10:00 до 22:00'; }
-    else if (h >= 6 && h < 10) { availText.textContent = 'Доброе утро — скоро отвечу'; availSub.textContent = 'Обычно с 10:00 до 22:00'; }
-    else if (h >= 22) { availText.textContent = 'Поздно — отвечу утром'; availSub.textContent = 'Обычно с 10:00 до 22:00'; }
-    else { availText.textContent = 'DizzDer доступен сейчас'; availSub.textContent = 'Отвечает быстро'; }
-    applyProjectFilters();
-    updateQuickFacts();
+    $('#availText').textContent = 'Открыт к предложениям';
+    $('#availSub').textContent = 'Напиши в Telegram или на почту — обсудим задачу.';
 
     /* ═══════════════════════════════════
        PROJECT QUICK VIEW
@@ -3123,6 +3021,37 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible 
         const active = btn.classList.toggle('active');
         btn.textContent = active ? 'Отмечено ✓' : 'Полезный отзыв';
       });
+    });
+
+
+    document.querySelectorAll('[role="tablist"]').forEach(list => {
+      const tabs = [...list.querySelectorAll('[role="tab"]')];
+      const sync = () => tabs.forEach(tab => tab.tabIndex = tab.getAttribute('aria-selected') === 'true' ? 0 : -1);
+      tabs.forEach((tab, i) => {
+        tab.addEventListener('click', sync);
+        tab.addEventListener('keydown', event => {
+          let next;
+          if (event.key === 'ArrowRight') next = (i + 1) % tabs.length;
+          if (event.key === 'ArrowLeft') next = (i - 1 + tabs.length) % tabs.length;
+          if (event.key === 'Home') next = 0;
+          if (event.key === 'End') next = tabs.length - 1;
+          if (next === undefined) return;
+          event.preventDefault(); tabs[next].click(); tabs[next].focus();
+        });
+      });
+      sync();
+    });
+    aboutTabs.forEach(tab => {
+      const key = tab.dataset.atab, panel = document.querySelector('[data-apane="' + key + '"]');
+      tab.id = 'about-tab-' + key; panel.id = 'about-panel-' + key;
+      tab.setAttribute('aria-controls', panel.id); panel.setAttribute('aria-labelledby', tab.id); panel.tabIndex = 0;
+    });
+    const formFields = [...document.querySelectorAll('#contactForm input, #contactForm textarea')];
+    formFields.forEach(field => field.addEventListener('input', () => { field.removeAttribute('aria-invalid'); formOk.classList.remove('show'); }));
+    // Native dialog labels are announced to assistive technology.
+    document.querySelectorAll('dialog').forEach(dialog => {
+      const heading = dialog.querySelector('h2,h3');
+      if (heading) { if (!heading.id) heading.id = dialog.id + '-heading'; dialog.setAttribute('aria-labelledby', heading.id); }
     });
 
   </script>
