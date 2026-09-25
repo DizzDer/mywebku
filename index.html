@@ -5,7 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#03000D" />
   <meta name="description" content="Портфолио DizzDer — Junior Frontend. Адаптивные сайты, чистая вёрстка, Figma → HTML/CSS." />
-  <title>DizzDer — Portfolio</title>
+  <title>DizzDer — Frontend-разработчик · Астана</title>
+  <meta property="og:title" content="DizzDer — Frontend-разработчик">
+  <meta property="og:description" content="Адаптивные сайты, аккуратный UI и вёрстка по Figma. Портфолио разработчика из Астаны.">
+  <meta property="og:type" content="website">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -74,7 +77,7 @@
       color: var(--text);
       overflow-x: hidden;
       line-height: 1.5;
-      cursor: none;
+      cursor: auto;
     }
 
     /* ANIME BACKGROUND PATTERN */
@@ -359,7 +362,7 @@
       font-family: 'Syne', sans-serif;
       font-weight: 700;
       font-size: 14px;
-      cursor: none;
+      cursor: auto;
       white-space: nowrap;
       user-select: none;
       transition: transform .14s, background .14s, border-color .14s, box-shadow .14s;
@@ -828,7 +831,7 @@
       font-family: 'Syne', sans-serif;
       font-weight: 700;
       font-size: 12px;
-      cursor: none;
+      cursor: auto;
       transition: color .15s, background .15s, border-color .15s;
     }
     .about-tab:hover { color: var(--text); }
@@ -1012,7 +1015,7 @@
       font-family: 'Syne', sans-serif;
       font-weight: 700;
       font-size: 12px;
-      cursor: none;
+      cursor: auto;
       transition: color .15s, background .15s, border-color .15s;
     }
     .tab:hover { color: var(--text); }
@@ -1113,7 +1116,7 @@
       font-family: 'Syne', sans-serif;
       font-weight: 700;
       font-size: 12px;
-      cursor: none;
+      cursor: auto;
       transition: color .15s, background .15s, border-color .15s;
     }
     .send-tab:hover { color: var(--text); }
@@ -1549,6 +1552,36 @@
       .char-stats { grid-template-columns: repeat(2,1fr); }
     }
   </style>
+<style>
+/* Portfolio refresh: quieter surfaces, confident type, a graphic identity. */
+:root { --bg:#0d0d12; --bg2:#141419; --surface:rgba(255,255,255,.025); --surface2:rgba(255,255,255,.055); --border:rgba(255,255,255,.10); --border2:rgba(255,255,255,.18); --text:#f2f0ef; --muted:#aaa7b1; --muted2:#96929f; --sakura:#e8a2b4; --sakura2:#f2bfcd; --max:1180px; }
+[data-theme="light"] { --bg:#f5f3f0; --bg2:#ebe8e5; --text:#201d24; --muted:#625e68; --muted2:#706975; --sakura:#a5365b; --sakura2:#92334f; }
+body { font-family:Arial,Helvetica,sans-serif; cursor:auto; background:var(--bg); }
+button,input,textarea { font:inherit; } a,button,[role="tab"] { cursor:pointer; }
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible { outline:2px solid var(--sakura); outline-offset:5px; }
+.cursor,.cursor-ring,#bgCanvas,.sakura-container,.noise,.orb,.hero-kanji,.hero-kanji-left { display:none; }
+.reveal { opacity:1; transform:none; }
+.container { width:min(var(--max),calc(100% - 64px)); }
+.nav { background:var(--bg); backdrop-filter:none; border-bottom:1px solid var(--border); }
+.nav-wrap { min-height:84px; gap:24px; }.brand { font-size:21px; letter-spacing:-.7px; }.logo { background:transparent; border:1px solid var(--border2); box-shadow:none; color:var(--sakura); border-radius:50%; }
+.nav-links { gap:8px; }.nav-links a { font:13px Arial,sans-serif; padding:10px; }.nav-links a.active { background:var(--surface2); color:var(--text); }
+.btn { border-radius:7px; box-shadow:none; min-height:44px; font:600 13px Arial,sans-serif; padding:12px 18px; gap:12px; }.btn::before { display:none; }.btn:hover { transform:translateY(-2px); box-shadow:none; border-color:var(--sakura); }.btn.primary { background:var(--text); border-color:var(--text); color:var(--bg); box-shadow:none; }.btn.primary:hover { background:var(--sakura); color:var(--bg); border-color:var(--sakura); }.btn.sm { padding:9px 12px; min-height:40px; }.btn.icon { min-width:44px; padding:10px; }
+.hero { padding:66px 0 62px; overflow:hidden; }.anime-banner { border:0; background:none; padding:0 0 26px; margin-bottom:30px; border-bottom:1px solid var(--border); border-radius:0; }.ab-icon { display:none; }.ab-text { color:var(--muted); font:12px 'Space Mono',monospace; }.ab-sub { font-size:10px; margin-top:7px; color:var(--muted2); }
+.hero-grid { grid-template-columns:1.2fr 1fr; gap:65px; align-items:center; }.hero-left { border:0; background:none; padding:0; overflow:visible; box-shadow:none; backdrop-filter:none; }.hero-left::before,.hero-left::after,.hero-right::before,.hero-right::after { display:none; }
+.kicker { margin-bottom:30px; }.kicker .pill { border:none; background:none; padding:0; font:11px 'Space Mono',monospace; color:var(--muted); }.kicker .pill:not(:first-child) { display:none; }.dot { box-shadow:none; animation:none; }.dot.s { background:#b3c794; }
+.hero-eyebrow { font:10px 'Space Mono',monospace; letter-spacing:2px; color:var(--muted); margin-bottom:22px; } h1 { font:500 clamp(52px,6.7vw,94px)/1.04 Arial,sans-serif; letter-spacing:-5px; margin-bottom:24px; }.hero-name { font-weight:800; }.name-dot { color:var(--sakura); }.hero-statement { font-size:21px; line-height:1.5; margin-bottom:15px; letter-spacing:-.4px; }.subtitle { max-width:440px; font-size:15px; line-height:1.8; }.typing-wrap { background:none; border:0; padding:0; font-size:11px; margin:20px 0 0; }.hero-ctas { margin-top:29px; gap:10px; }.hero-ctas .btn { padding:16px 22px; }.hero-ctas .ghost { width:100%; justify-content:flex-start; padding:8px 0; border:0; color:var(--muted); font-size:11px; min-height:28px; }.hero-left .power-bar-wrap,.hero-left .meta-row,.hero-left .divider,.hero-left .scroll-hint { display:none; }
+.hero-right { padding:0; border:1px solid var(--border2); border-radius:12px; background:var(--bg2); gap:0; box-shadow:none; backdrop-filter:none; }.developer-art { aspect-ratio:1.25; overflow:hidden; background:#dba3b2; color:#252029; position:relative; isolation:isolate; }.developer-art::before { content:''; position:absolute; inset:0; background-image:linear-gradient(#34283215 1px,transparent 1px),linear-gradient(90deg,#34283215 1px,transparent 1px); background-size:34px 34px; }.art-label { position:absolute; top:20px; left:22px; right:22px; display:flex; justify-content:space-between; font:9px 'Space Mono',monospace; letter-spacing:1px; }.art-label span:last-child { font-size:26px; }.art-orbit { width:72%; aspect-ratio:1; border:1px solid #59404a80; border-radius:50%; position:absolute; left:14%; top:13%; }.art-orbit::before { content:''; position:absolute; inset:18px; border:1px solid #59404a50; border-radius:50%; }.art-kanji { position:absolute; font:220px/1 'Noto Serif JP',serif; right:24px; top:70px; opacity:.12; }.art-glyph { position:absolute; inset:0; display:grid; place-items:center; font:800 clamp(85px,10vw,150px)/1 Arial,sans-serif; letter-spacing:-15px; transform:rotate(-10deg); text-shadow:6px 8px 0 #f5ced880; }.art-caption { position:absolute; bottom:23px; left:23px; font:9px/1.7 'Space Mono',monospace; letter-spacing:1px; }.art-seal { position:absolute; right:24px; bottom:25px; font:12px/1.5 'Space Mono',monospace; padding:6px 9px; border:1px solid #59404a; transform:rotate(8deg); }
+.mini-grid { padding:25px; gap:25px 15px; }.mini { background:none; border:0; padding:0; border-radius:0; }.mini h4 { font:10px Arial,sans-serif; color:var(--muted); margin-bottom:8px; }.mini p { font-size:12px; color:var(--text); }.char-stats { display:none; }.profile-foot { display:flex; justify-content:space-between; padding:18px 25px; border-top:1px solid var(--border); color:var(--muted); font-size:11px; }.profile-foot a { color:var(--text); }
+.section { padding:66px 0; scroll-margin-top:90px; }.section-head { align-items:end; margin-bottom:30px; }.section-head h2 { font:600 clamp(30px,3.8vw,44px)/1.15 Arial,sans-serif; letter-spacing:-1.6px; margin:14px 0; }.section-head p { font-size:14px; max-width:650px; line-height:1.7; }.sec-num { font-size:10px; letter-spacing:1.5px; color:var(--sakura); }.anime-divider { display:none; }.anime-badge { background:none; border:0; color:var(--muted); font-size:11px; white-space:nowrap; }.glass,.skill-card,.project,.service-card,.faq-card,.lab-card,.metric-card,.accent-card,.review-card { background:var(--surface); border:1px solid var(--border); box-shadow:none; backdrop-filter:none; border-radius:10px; }.card { padding:28px; }.card::before,.project::before,.service-card::before,.skill-card::before,.review-card::before,.accent-card::before { display:none; }.about-text p { font-size:15px; line-height:1.85; }.about-tabs { flex-wrap:wrap; }.about-tab { font-size:12px; }.lore-card { background:var(--surface); border-color:var(--border); }.lore-title { color:var(--sakura); }.facts .fact { padding:11px 0; }.stats .n { font-family:Arial,sans-serif; font-size:32px; }.skill-card { padding:24px; }.skill-rank { opacity:.12; }.bar { height:3px; }.fill { background:var(--sakura); box-shadow:none; }.badge,.tag,.pill { box-shadow:none; }.skill-top h3 { font:600 17px Arial,sans-serif; }
+.projects-toolbar { flex-wrap:wrap; gap:18px; }.toolbar-right { flex-wrap:wrap; }.search { min-height:44px; }.projects-grid { gap:20px; }.project { padding:25px; transition:border-color .2s,transform .2s; }.project:hover { transform:translateY(-4px); border-color:var(--sakura); box-shadow:none; }.project h3 { font:600 21px Arial,sans-serif; letter-spacing:-.5px; }.project p { line-height:1.75; font-size:13px; }.project .top { flex-wrap:wrap; gap:12px; }.project .top .pill { font-size:9px; }.project .actions { flex-wrap:wrap; }.project .tag { background:var(--surface2); border:0; font-size:10px; }.project .actions a:first-of-type { display:none; }.empty-state { border:1px dashed var(--border2); border-radius:10px; padding:30px; color:var(--muted); }.empty-state[hidden] { display:none; }
+.service-card { padding:30px; }.service-card h3 { font:600 23px Arial,sans-serif; letter-spacing:-.7px; }.service-card .price { color:var(--sakura); font-size:12px; }.grad-text-anime,.grad-text-vc { background:none; -webkit-text-fill-color:var(--sakura); color:var(--sakura); }.faq-top { gap:15px; }.faq-top h3 { line-height:1.5; }.faq-answer { color:var(--muted); }.contact-grid { gap:24px; }input,textarea { background:var(--bg); border-radius:6px; }.contact-grid .btn { white-space:normal; }.contact-grid .v { overflow-wrap:anywhere; }.drawer-panel { overflow-y:auto; max-height:calc(100dvh - 32px); background:var(--bg); }.drawer-close { align-self:flex-end; margin-bottom:12px; }.drawer[inert] { visibility:hidden; }.drawer.show { visibility:visible; }.drawer a { min-height:44px; }footer { border-top:1px solid var(--border); }.reveal.d1,.reveal.d2,.reveal.d3,.reveal.d4 { transition-delay:0s; }
+@media(min-width:981px) and (max-width:1140px) { .nav-links { gap:0; }.nav-links a { padding:8px; font-size:12px; }.nav-wrap { gap:12px; }.hero-grid { gap:30px; } }
+@media(max-width:980px) { .hero-grid { grid-template-columns:1.1fr 1fr; gap:28px; } h1 { font-size:64px; letter-spacing:-3px; }.hero-statement { font-size:18px; }.hero { padding-top:38px; }.hero-ctas .btn { padding:13px 15px; }.mini-grid { padding:19px; gap:18px; }.developer-art { aspect-ratio:1; }.art-glyph { font-size:100px; }.art-kanji { font-size:180px; }.profile-foot { padding:15px; font-size:10px; }.section-head { flex-wrap:wrap; } }
+@media(max-width:700px) { .container { width:calc(100% - 36px); }.nav-wrap { min-height:72px; gap:12px; }.nav-actions { gap:6px; }.nav-actions>.primary { display:none; }.hero-grid { grid-template-columns:1fr; gap:36px; }.hero { padding-bottom:24px; }.anime-banner { margin-bottom:24px; }.kicker { margin-bottom:24px; }.hero-eyebrow { font-size:9px; letter-spacing:1.2px; } h1 { font-size:clamp(56px,14vw,86px); }.hero-left { padding:0; }.hero-ctas { gap:10px; }.hero-right { width:100%; }.developer-art { aspect-ratio:1.4; }.art-glyph { font-size:125px; }.art-kanji { font-size:200px; top:40px; }.mini-grid { padding:24px; }.section { padding:42px 0; }.section-head { margin-bottom:24px; }.section-head .anime-badge { display:none; }.grid2,.skills-grid,.projects-grid,.services-grid,.lab-grid,.faq-grid,.split,.wins-grid,.reviews-grid,.contact-grid { grid-template-columns:1fr; }.metrics-grid { grid-template-columns:1fr 1fr; }.card,.project { padding:22px; }.projects-toolbar,.toolbar-right { width:100%; }.search { width:100%; }.toolbar-right .btn { flex:1; }.nav-links { display:none; }.about-tabs { gap:4px; }.about-tab { padding:10px; }.hero .subtitle { max-width:100%; }.contact-grid .row { flex-wrap:wrap; }.contact-grid .pill { max-width:100%; }.ab-sub { line-height:1.7; } }
+.hero-left.glass { background:none; border:0; border-radius:0; box-shadow:none; }.anime-banner .ab-icon,.anime-banner::after { display:none; }.profile-foot .dot { display:inline-block; margin-right:7px; }.anime-banner .ab-text { font:12px 'Space Mono',monospace; }.brand { font-family:Arial,sans-serif; }
+@media(prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none!important; transition:none!important; scroll-behavior:auto!important; } }
+
+</style>
 </head>
 
 <body>
@@ -1578,21 +1611,10 @@
             <span>DizzDer</span>
           </a>
 
-          <nav class="nav-links" aria-label="Разделы">
-            <a href="#about">Обо мне</a>
-            <a href="#skills">Навыки</a>
-            <a href="#projects">Проекты</a>
-            <a href="#services">Услуги</a>
-            <a href="#lab">Lab</a>
-            <a href="#faq">FAQ</a>
-            <a href="#wins">Achievements</a>
-            <a href="#reviews">Отзывы</a>
-            <a href="#edu">Образование</a>
-            <a href="#contact">Контакты</a>
-          </nav>
+          <nav class="nav-links" aria-label="Разделы"><a href="#about">Обо мне</a><a href="#projects">Проекты</a><a href="#skills">Навыки</a><a href="#services">Услуги</a><a href="#contact">Контакты</a></nav>
 
           <div class="nav-actions">
-            <button class="btn icon menu-btn" type="button" id="menuBtn" aria-label="Открыть меню">
+            <button class="btn icon menu-btn" type="button" id="menuBtn" aria-label="Открыть меню" aria-controls="drawer" aria-expanded="false">
               <svg width="18" height="14" viewBox="0 0 18 14" fill="none"><rect width="18" height="2" rx="1" fill="currentColor"/><rect y="6" width="12" height="2" rx="1" fill="currentColor"/><rect y="12" width="18" height="2" rx="1" fill="currentColor"/></svg>
             </button>
             <button class="btn icon" type="button" id="themeBtn" aria-label="Сменить тему">
@@ -1605,8 +1627,8 @@
     </header>
 
     <!-- DRAWER -->
-    <div class="drawer" id="drawer" aria-hidden="true">
-      <div class="drawer-panel glass-hi">
+    <div class="drawer" id="drawer" aria-hidden="true" inert>
+      <div class="drawer-panel glass-hi" role="dialog" aria-modal="true" aria-label="Меню"><button class="btn drawer-close" type="button">Закрыть ×</button>
         <a href="#about" data-drawerlink>Обо мне <span>→</span></a>
         <a href="#skills" data-drawerlink>Навыки <span>→</span></a>
         <a href="#projects" data-drawerlink>Проекты <span>→</span></a>
@@ -1651,10 +1673,10 @@
                 <span class="pill"><span class="dot c" aria-hidden="true"></span> Frontend · HTML/CSS</span>
               </div>
 
-              <h1>Привет,<br>я&nbsp;<span class="grad-text-anime glitch" data-text="DizzDer">DizzDer</span></h1>
+              <p class="hero-eyebrow">FRONTEND DEVELOPER / ASTANA, KZ</p><h1>Привет, я<br><span class="hero-name">DizzDer<span class="name-dot">.</span></span></h1><p class="hero-statement">Из идеи — в живой интерфейс.</p>
 
               <p class="subtitle">
-                Делаю аккуратные, быстрые и адаптивные сайты. Люблю чистую вёрстку, понятный дизайн и работать по макету Figma&nbsp;→&nbsp;HTML/CSS.
+                Создаю адаптивные сайты с вниманием к деталям. Переношу макеты из Figma в код и делаю интерфейсы, которыми приятно пользоваться.
               </p>
 
               <div class="typing-wrap" aria-label="Динамическая строка">
@@ -1664,7 +1686,7 @@
               </div>
 
               <div class="hero-ctas">
-                <a class="btn primary" href="#projects">Мои проекты</a>
+                <a class="btn primary" href="#projects">Смотреть проекты <span aria-hidden="true">↗</span></a>
                 <a class="btn" href="#contact">Написать мне</a>
                 <button class="btn ghost" type="button" id="copyPortfolioBtn">Скопировать ссылку</button>
               </div>
@@ -1694,13 +1716,7 @@
             </div>
 
             <aside class="hero-right glass reveal d2" aria-label="Карточка профиля">
-              <div class="avatar-wrap">
-                <div class="avatar-inner" aria-label="Аватар / QR-код">
-                  <img src="https://github.com/DizzDer/mywebku/blob/main/qr-code.png?raw=true" alt="QR Code — ссылка на портфолио" class="qr-img">
-                </div>
-              </div>
-
-              <div class="mini-grid">
+              <div class="developer-art" aria-hidden="true"><div class="art-label"><span>PERSONAL SPACE / 001</span><span>✳</span></div><div class="art-orbit"></div><span class="art-kanji">夢</span><span class="art-glyph">&lt;/&gt;</span><span class="art-caption">MAKE IT SIMPLE.<br>MAKE IT WORK.</span><span class="art-seal">DD<br>開発者</span></div><div class="mini-grid">
                 <div class="mini">
                   <h4>Сильная сторона</h4>
                   <p>Адаптив + аккуратный UI</p>
@@ -1720,7 +1736,7 @@
               </div>
 
               <!-- Anime character stats -->
-              <div class="char-stats">
+              <div class="profile-foot"><span><span class="dot s"></span> Открыт к проектам</span><a href="https://github.com/DizzDer" target="_blank" rel="noreferrer">GitHub ↗</a></div><div class="char-stats">
                 <div class="char-stat">
                   <div class="cs-val">88</div>
                   <div class="cs-key">HTML/CSS</div>
@@ -1751,7 +1767,7 @@
             <div>
               <span class="sec-num mono">// 01 — ОБО МНЕ</span>
               <h2>Обо&nbsp;мне</h2>
-              <p>Собираю "дорогой" UI, верстаю по макету и делаю адаптив.</p>
+              <p>Студент, разработчик и человек, которому важны детали.</p>
             </div>
             <span class="anime-badge">⛩ Figma → HTML/CSS</span>
           </div>
@@ -1913,7 +1929,7 @@
             <div>
               <span class="sec-num mono">// 03 — ПРОЕКТЫ</span>
               <h2>Проекты</h2>
-              <p>Фильтры по категориям и копирование ссылки в один клик.</p>
+              <p>Практика в коде: лендинги, компоненты и интерфейсы.</p>
             </div>
             <span class="anime-badge">✅ Done</span>
           </div>
@@ -1934,12 +1950,12 @@
             <div class="toolbar-right">
               <input class="search" id="projectSearch" type="search" placeholder="Поиск по проектам..." aria-label="Поиск по проектам">
               <button class="btn sm" type="button" id="onlyFavBtn">Избранное</button>
-              <button class="btn sm" type="button" id="copyAllDemosBtn">Скопировать Demo</button>
+              <button class="btn sm" type="button" id="copyAllDemosBtn">Скопировать ссылки</button>
               <button class="btn sm" type="button" id="shuffleBtn">Перемешать 🎲</button>
             </div>
           </div>
 
-          <div class="projects-grid" id="projectsGrid">
+          <p id="projectEmpty" class="empty-state" role="status" hidden>Ничего не найдено. Попробуй другой запрос или выбери «Все».</p><div class="projects-grid" id="projectsGrid">
             <article class="project reveal d1" data-cat="landing">
               <div>
                 <div class="top">
@@ -1951,10 +1967,10 @@
               </div>
               <div class="actions">
                 <button class="btn sm ghost fav-btn" type="button">★</button>
-                <a class="btn sm" target="_blank" rel="noreferrer" href="https://github.com/DizzDer">Code</a>
-                <a class="btn primary sm" target="_blank" rel="noreferrer" href="https://github.com/DizzDer/Async-price-tracker-" data-demo>Live Demo</a>
-                <button class="btn sm" type="button" data-preview>Quick View</button>
-                <button class="btn sm ghost" type="button" data-copy="https://github.com/DizzDer/Async-price-tracker-">Копировать</button>
+                <a class="btn sm" target="_blank" rel="noreferrer" href="https://github.com/DizzDer/mywebku">Code</a>
+                <a class="btn primary sm" target="_blank" rel="noreferrer" href="https://github.com/DizzDer/mywebku" data-demo>Репозиторий ↗</a>
+                <button class="btn sm" type="button" data-preview>Подробнее</button>
+                <button class="btn sm ghost" type="button" data-copy="https://github.com/DizzDer/mywebku">Копировать</button>
               </div>
             </article>
 
@@ -1969,9 +1985,9 @@
               </div>
               <div class="actions">
                 <button class="btn sm ghost fav-btn" type="button">★</button>
-                <a class="btn sm" target="_blank" rel="noreferrer" href="https://github.com/DizzDer">Code</a>
-                <a class="btn primary sm" target="_blank" rel="noreferrer" href="https://github.com/DizzDer/Async-price-tracker-" data-demo>Live Demo</a>
-                <button class="btn sm" type="button" data-preview>Quick View</button>
+                <a class="btn sm" target="_blank" rel="noreferrer" href="https://github.com/DizzDer/Async-price-tracker-">Code</a>
+                <a class="btn primary sm" target="_blank" rel="noreferrer" href="https://github.com/DizzDer/Async-price-tracker-" data-demo>Репозиторий ↗</a>
+                <button class="btn sm" type="button" data-preview>Подробнее</button>
                 <button class="btn sm ghost" type="button" data-copy="https://github.com/DizzDer/Async-price-tracker-">Копировать</button>
               </div>
             </article>
@@ -1987,9 +2003,9 @@
               </div>
               <div class="actions">
                 <button class="btn sm ghost fav-btn" type="button">★</button>
-                <a class="btn sm" target="_blank" rel="noreferrer" href="https://github.com/DizzDer">Code</a>
-                <a class="btn primary sm" target="_blank" rel="noreferrer" href="https://github.com/DizzDer/ToDo-App-in-con" data-demo>Live Demo</a>
-                <button class="btn sm" type="button" data-preview>Quick View</button>
+                <a class="btn sm" target="_blank" rel="noreferrer" href="https://github.com/DizzDer/ToDo-App-in-con">Code</a>
+                <a class="btn primary sm" target="_blank" rel="noreferrer" href="https://github.com/DizzDer/ToDo-App-in-con" data-demo>Репозиторий ↗</a>
+                <button class="btn sm" type="button" data-preview>Подробнее</button>
                 <button class="btn sm ghost" type="button" data-copy="https://github.com/DizzDer/ToDo-App-in-con">Копировать</button>
               </div>
             </article>
@@ -2005,9 +2021,9 @@
               </div>
               <div class="actions">
                 <button class="btn sm ghost fav-btn" type="button">★</button>
-                <a class="btn sm" target="_blank" rel="noreferrer" href="https://github.com/DizzDer">Code</a>
-                <a class="btn primary sm" target="_blank" rel="noreferrer" href="https://github.com/DizzDer/ToDo-App-in-con" data-demo>Live Demo</a>
-                <button class="btn sm" type="button" data-preview>Quick View</button>
+                <a class="btn sm" target="_blank" rel="noreferrer" href="https://github.com/DizzDer/ToDo-App-in-con">Code</a>
+                <a class="btn primary sm" target="_blank" rel="noreferrer" href="https://github.com/DizzDer/ToDo-App-in-con" data-demo>Репозиторий ↗</a>
+                <button class="btn sm" type="button" data-preview>Подробнее</button>
                 <button class="btn sm ghost" type="button" data-copy="https://github.com/DizzDer/ToDo-App-in-con">Копировать</button>
               </div>
             </article>
@@ -2023,9 +2039,9 @@
               </div>
               <div class="actions">
                 <button class="btn sm ghost fav-btn" type="button">★</button>
-                <a class="btn sm" target="_blank" rel="noreferrer" href="https://github.com/DizzDer">Code</a>
-                <a class="btn primary sm" target="_blank" rel="noreferrer" href="https://github.com/DizzDer/ToDo-App-in-con" data-demo>Live Demo</a>
-                <button class="btn sm" type="button" data-preview>Quick View</button>
+                <a class="btn sm" target="_blank" rel="noreferrer" href="https://github.com/DizzDer/ToDo-App-in-con">Code</a>
+                <a class="btn primary sm" target="_blank" rel="noreferrer" href="https://github.com/DizzDer/ToDo-App-in-con" data-demo>Репозиторий ↗</a>
+                <button class="btn sm" type="button" data-preview>Подробнее</button>
                 <button class="btn sm ghost" type="button" data-copy="https://github.com/DizzDer/ToDo-App-in-con">Копировать</button>
               </div>
             </article>
@@ -2041,9 +2057,9 @@
               </div>
               <div class="actions">
                 <button class="btn sm ghost fav-btn" type="button">★</button>
-                <a class="btn sm" target="_blank" rel="noreferrer" href="https://github.com/DizzDer">Code</a>
-                <a class="btn primary sm" target="_blank" rel="noreferrer" href="https://github.com/DizzDer/Auth-UI-Kit" data-demo>Live Demo</a>
-                <button class="btn sm" type="button" data-preview>Quick View</button>
+                <a class="btn sm" target="_blank" rel="noreferrer" href="https://github.com/DizzDer/Auth-UI-Kit">Code</a>
+                <a class="btn primary sm" target="_blank" rel="noreferrer" href="https://github.com/DizzDer/Auth-UI-Kit" data-demo>Репозиторий ↗</a>
+                <button class="btn sm" type="button" data-preview>Подробнее</button>
                 <button class="btn sm ghost" type="button" data-copy="https://github.com/DizzDer/Auth-UI-Kit">Копировать</button>
               </div>
             </article>
@@ -2058,7 +2074,7 @@
             <div>
               <span class="sec-num mono">// 04 — УСЛУГИ</span>
               <h2>Что я могу сделать</h2>
-              <p>DizzDer — реальное портфолио для заказчика.</p>
+              <p>Помогу превратить макет в сайт или улучшить то, что уже работает.</p>
             </div>
             <span class="anime-badge">⛩ Mini services</span>
           </div>
@@ -2383,8 +2399,8 @@
                   <button class="send-tab" type="button" data-send="copy" role="tab" aria-selected="false">Копировать</button>
                 </div>
 
-                <div class="errors" id="formErrors"></div>
-                <div class="okline" id="formOk"></div>
+                <div class="errors" id="formErrors" role="alert"></div>
+                <div class="okline" id="formOk" role="status"></div>
 
                 <div class="hintline">
                   <span class="pill" id="sendHint"><span class="dot s" aria-hidden="true"></span> Открою Telegram с готовым текстом</span>
@@ -2555,7 +2571,7 @@
             <p>Открой код, перейди к демо или быстро скопируй ссылку проекта прямо из модального окна.</p>
             <div class="actions">
               <a class="btn sm" href="#" id="projectModalCode" target="_blank" rel="noreferrer">Code</a>
-              <a class="btn primary sm" href="#" id="projectModalDemo" target="_blank" rel="noreferrer">Live Demo</a>
+              <a class="btn primary sm" href="#" id="projectModalDemo" target="_blank" rel="noreferrer">Репозиторий ↗</a>
               <button class="btn sm ghost" type="button" id="projectModalCopy">Копировать ссылку</button>
             </div>
           </aside>
@@ -2568,134 +2584,24 @@
     /* ═══════════════════════════════════
        UTILS
     ═══════════════════════════════════ */
+    const storage = { getItem(key) { try { return localStorage.getItem(key); } catch { return null; } }, setItem(key, value) { try { localStorage.setItem(key, value); } catch {} } };
     const $ = (s, r = document) => r.querySelector(s);
     const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
 
     /* ═══════════════════════════════════
        SAKURA PETALS
     ═══════════════════════════════════ */
-    (function initSakura() {
-      const container = document.getElementById('sakuraContainer');
-      if (!container) return;
-      const PETAL_COUNT = 18;
-      for (let i = 0; i < PETAL_COUNT; i++) {
-        const p = document.createElement('div');
-        p.className = 'petal';
-        const size = Math.random() * 8 + 5;
-        p.style.cssText = `
-          left: ${Math.random() * 100}%;
-          width: ${size}px;
-          height: ${size}px;
-          animation-duration: ${Math.random() * 10 + 8}s;
-          animation-delay: ${Math.random() * 14}s;
-          opacity: 0;
-        `;
-        container.appendChild(p);
-      }
-    })();
+
 
     /* ═══════════════════════════════════
        CANVAS PARTICLES (anime colors)
     ═══════════════════════════════════ */
-    (function initCanvas() {
-      const canvas = document.getElementById('bgCanvas');
-      const ctx = canvas.getContext('2d');
-      let W, H, particles = [];
-      const COUNT = 55;
 
-      function resize() {
-        W = canvas.width = window.innerWidth;
-        H = canvas.height = window.innerHeight;
-      }
-      resize();
-      window.addEventListener('resize', resize);
-
-      const COLORS = [
-        'rgba(255,107,157,',
-        'rgba(139,92,246,',
-        'rgba(6,182,212,',
-        'rgba(125,249,255,',
-        'rgba(167,139,250,',
-      ];
-
-      function mkParticle() {
-        return {
-          x: Math.random() * W,
-          y: Math.random() * H,
-          r: Math.random() * 1.8 + 0.4,
-          vx: (Math.random() - 0.5) * 0.3,
-          vy: (Math.random() - 0.5) * 0.3,
-          alpha: Math.random() * 0.5 + 0.1,
-          color: COLORS[Math.floor(Math.random() * COLORS.length)],
-        };
-      }
-
-      for (let i = 0; i < COUNT; i++) particles.push(mkParticle());
-
-      function draw() {
-        ctx.clearRect(0, 0, W, H);
-        for (const p of particles) {
-          p.x += p.vx; p.y += p.vy;
-          if (p.x < 0) p.x = W;
-          if (p.x > W) p.x = 0;
-          if (p.y < 0) p.y = H;
-          if (p.y > H) p.y = 0;
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fillStyle = p.color + p.alpha + ')';
-          ctx.fill();
-        }
-        for (let i = 0; i < particles.length; i++) {
-          for (let j = i + 1; j < particles.length; j++) {
-            const dx = particles[i].x - particles[j].x;
-            const dy = particles[i].y - particles[j].y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < 120) {
-              ctx.beginPath();
-              ctx.strokeStyle = `rgba(255,107,157,${(1 - dist / 120) * 0.06})`;
-              ctx.lineWidth = 0.6;
-              ctx.moveTo(particles[i].x, particles[i].y);
-              ctx.lineTo(particles[j].x, particles[j].y);
-              ctx.stroke();
-            }
-          }
-        }
-        requestAnimationFrame(draw);
-      }
-      draw();
-    })();
 
     /* ═══════════════════════════════════
        CUSTOM CURSOR (anime sakura)
     ═══════════════════════════════════ */
-    (function initCursor() {
-      const cur = document.getElementById('cursor');
-      const ring = document.getElementById('cursorRing');
-      let mx = -100, my = -100, rx = -100, ry = -100;
-      document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-      function moveCursor() {
-        cur.style.left = mx + 'px';
-        cur.style.top = my + 'px';
-        rx += (mx - rx) * 0.12;
-        ry += (my - ry) * 0.12;
-        ring.style.left = rx + 'px';
-        ring.style.top = ry + 'px';
-        requestAnimationFrame(moveCursor);
-      }
-      moveCursor();
-      document.querySelectorAll('a, button, [role="tab"]').forEach(el => {
-        el.addEventListener('mouseenter', () => {
-          cur.style.width = '20px'; cur.style.height = '20px';
-          ring.style.width = '52px'; ring.style.height = '52px';
-          ring.style.borderColor = 'rgba(255,107,157,.7)';
-        });
-        el.addEventListener('mouseleave', () => {
-          cur.style.width = '12px'; cur.style.height = '12px';
-          ring.style.width = '36px'; ring.style.height = '36px';
-          ring.style.borderColor = 'rgba(255,107,157,.5)';
-        });
-      });
-    })();
+
 
     /* ═══════════════════════════════════
        TOAST
@@ -2738,14 +2644,14 @@
         icon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
       }
     };
-    const saved = localStorage.getItem(THEME_KEY);
+    const saved = storage.getItem(THEME_KEY);
     if (saved) applyTheme(saved);
 
     const toggleTheme = () => {
       const cur = document.documentElement.getAttribute('data-theme') || 'dark';
       const next = cur === 'light' ? 'dark' : 'light';
       applyTheme(next);
-      localStorage.setItem(THEME_KEY, next);
+      storage.setItem(THEME_KEY, next);
       showToast(next === 'light' ? 'Светлая тема ☀️' : 'Тёмная тема 🌙');
     };
     $('#themeBtn').addEventListener('click', toggleTheme);
@@ -2790,8 +2696,10 @@
     ═══════════════════════════════════ */
     const drawer = $('#drawer');
     const menuBtn = $('#menuBtn');
-    const closeDrawer = () => { drawer.classList.remove('show'); drawer.setAttribute('aria-hidden', 'true'); };
-    const openDrawer = () => { drawer.classList.add('show'); drawer.setAttribute('aria-hidden', 'false'); };
+    const closeDrawer = () => { const wasOpen = drawer.classList.contains('show'); drawer.classList.remove('show'); drawer.setAttribute('aria-hidden', 'true'); drawer.inert = true; menuBtn.setAttribute('aria-expanded', 'false'); document.body.style.overflow = ''; if (wasOpen) menuBtn.focus(); };
+    const openDrawer = () => { drawer.inert = false; drawer.classList.add('show'); drawer.setAttribute('aria-hidden', 'false'); menuBtn.setAttribute('aria-expanded', 'true'); document.body.style.overflow = 'hidden'; drawer.querySelector('button').focus(); };
+    drawer.querySelector('.drawer-close').addEventListener('click', closeDrawer);
+    drawer.addEventListener('keydown', e => { if (e.key !== 'Tab') return; const items = [...drawer.querySelectorAll('a, button')]; const first = items[0], last = items.at(-1); if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); } else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); } });
     menuBtn.addEventListener('click', openDrawer);
     drawer.addEventListener('click', e => { if (e.target === drawer) closeDrawer(); });
     $$('[data-drawerlink]').forEach(a => a.addEventListener('click', closeDrawer));
@@ -2805,7 +2713,6 @@
     });
     $('#copyPortfolioBtn').addEventListener('click', async () => {
       await copyText(location.href.split('#')[0]);
-      showToast('Ссылка на портфолио скопирована ✅');
     });
 
     /* ═══════════════════════════════════
@@ -2829,7 +2736,7 @@
       if (dir === -1 && ci <= 0) { dir = 1; pi = (pi + 1) % phrases.length; }
       setTimeout(tick, dir === 1 ? 55 : 35);
     };
-    setTimeout(tick, 500);
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) setTimeout(tick, 500);
 
     /* ═══════════════════════════════════
        COUNTER ANIMATION
@@ -2921,14 +2828,14 @@
        SEND MODE & FORM
     ═══════════════════════════════════ */
     const SEND_KEY = 'dizzder_send_mode';
-    let sendMode = localStorage.getItem(SEND_KEY) || 'telegram';
+    let sendMode = storage.getItem(SEND_KEY) || 'telegram';
     const sendTabs = $$('.send-tab');
     const sendHint = $('#sendHint');
     const sendBtn = $('#sendBtn');
 
     const setSendMode = (mode) => {
       sendMode = mode;
-      localStorage.setItem(SEND_KEY, mode);
+      storage.setItem(SEND_KEY, mode);
       sendTabs.forEach(t => {
         const a = t.getAttribute('data-send') === mode;
         t.classList.toggle('active', a);
@@ -2978,7 +2885,7 @@
       const text = buildMessage();
       if (sendMode === 'telegram') { openTG(text); showToast('Открываю Telegram ✅'); formOk.textContent = 'Telegram открыт в новой вкладке.'; formOk.classList.add('show'); return; }
       if (sendMode === 'email') { openEM(text); showToast('Открываю Email ✅'); formOk.textContent = 'Email-клиент открыт.'; formOk.classList.add('show'); return; }
-      await copyText(text);
+      if (!await copyText(text)) { formOk.classList.remove('show'); return; }
       formOk.textContent = 'Сообщение скопировано в буфер.';
       formOk.classList.add('show');
     };
@@ -2987,6 +2894,7 @@
     $('#clearForm').addEventListener('click', () => {
       $('#name').value = ''; $('#email').value = ''; $('#msg').value = '';
       formErrors.classList.remove('show'); formOk.classList.remove('show');
+      syncCount();
       showToast('Очищено 🧼');
     });
 
@@ -3012,7 +2920,8 @@
     const projectSearch = $('#projectSearch');
     const onlyFavBtn = $('#onlyFavBtn');
     const FAV_KEY = 'dizzder_favs';
-    let favs = new Set(JSON.parse(localStorage.getItem(FAV_KEY) || '[]'));
+    let savedFavs; try { savedFavs = JSON.parse(storage.getItem(FAV_KEY) || '[]'); } catch { savedFavs = []; }
+    let favs = new Set(Array.isArray(savedFavs) ? savedFavs : []);
     let onlyFav = false;
     const projectCards = $$('.project');
 
@@ -3021,11 +2930,14 @@
     projectCards.forEach(card => {
       const title = getProjectTitle(card);
       const favBtn = card.querySelector('.fav-btn');
+      favBtn.setAttribute('aria-label', 'В избранное: ' + title);
+      favBtn.setAttribute('aria-pressed', String(favs.has(title)));
       if (favs.has(title)) favBtn.classList.add('active');
       favBtn.addEventListener('click', () => {
         if (favs.has(title)) { favs.delete(title); favBtn.classList.remove('active'); }
         else { favs.add(title); favBtn.classList.add('active'); }
-        localStorage.setItem(FAV_KEY, JSON.stringify([...favs]));
+        favBtn.setAttribute('aria-pressed', String(favs.has(title)));
+        storage.setItem(FAV_KEY, JSON.stringify([...favs]));
         applyProjectFilters();
         updateQuickFacts();
         showToast('Избранное обновлено ⭐');
@@ -3044,6 +2956,7 @@
         const matchFav = !onlyFav || favs.has(title);
         card.style.display = (matchTab && matchSearch && matchFav) ? '' : 'none';
       });
+      $('#projectEmpty').hidden = projectCards.some(card => card.style.display !== 'none');
     };
 
     pTabs.forEach(t => t.addEventListener('click', () => setTimeout(applyProjectFilters, 0)));
@@ -3058,10 +2971,16 @@
     /* ═══════════════════════════════════
        FAQ TOGGLE
     ═══════════════════════════════════ */
-    $$('.faq-open').forEach(btn => {
+    $$('.faq-open').forEach((btn, index) => {
+      const answer = btn.closest('.faq-card').querySelector('.faq-answer');
+      answer.id = 'faq-answer-' + index;
+      btn.setAttribute('aria-controls', answer.id);
+      btn.setAttribute('aria-label', btn.closest('.faq-card').querySelector('h3').textContent);
+      btn.setAttribute('aria-expanded', 'false');
       btn.addEventListener('click', () => {
         const card = btn.closest('.faq-card');
         card.classList.toggle('open');
+        btn.setAttribute('aria-expanded', String(card.classList.contains('open')));
         btn.querySelector('.faq-toggle').textContent = card.classList.contains('open') ? '−' : '+';
       });
     });
@@ -3189,10 +3108,10 @@
       root.style.setProperty('--grd-sakura', `linear-gradient(135deg, ${preset.v}, ${preset.g}, ${preset.c})`);
       root.style.setProperty('--sakura', preset.v);
       root.style.setProperty('--sakura2', preset.vl);
-      localStorage.setItem(ACCENT_KEY, name);
+      storage.setItem(ACCENT_KEY, name);
       showToast('Стиль обновлён ✨');
     };
-    const savedAccent = localStorage.getItem(ACCENT_KEY);
+    const savedAccent = storage.getItem(ACCENT_KEY);
     if (savedAccent) applyAccent(savedAccent);
     $$('[data-accent]').forEach(btn => btn.addEventListener('click', () => applyAccent(btn.getAttribute('data-accent'))));
 
@@ -3209,3 +3128,5 @@
   </script>
 </body>
 </html>
+
+
