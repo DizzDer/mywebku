@@ -15,9 +15,9 @@ test('all local anchors and assets resolve', () => {
 });
 test('every project opens a documented repository', () => {
   const keys = [...new Set([...html.matchAll(/data-project="([^"]+)"/g)].map(m => m[1]))];
-  assert.equal(keys.length, 4);
+  assert.equal(keys.length, 9);
   for (const key of keys) assert.ok(js.includes(`${key}: {`), key);
-  for (const repo of ['bounded-executor','dag-planner','ttl-lru-cache','Async-price-tracker-']) assert.ok(js.includes(`https://github.com/DizzDer/${repo}`));
+  for (const repo of ['bounded-executor','dag-planner','ttl-lru-cache','Async-price-tracker-','Smart-drone','durable-journal','cafedra','cs2-lan-practice','ToDo-App-in-con']) assert.ok(js.includes(`https://github.com/DizzDer/${repo}`));
 });
 test('primary identity, contacts and baseline accessibility remain present', () => {
   assert.equal((html.match(/<h1\b/g) || []).length, 1);
@@ -27,4 +27,15 @@ test('primary identity, contacts and baseline accessibility remain present', () 
   assert.ok(html.includes('class="skip-link"'));
   assert.ok(html.includes('aria-labelledby="dialog-title"'));
   for (const tag of html.matchAll(/<a\b[^>]+target="_blank"[^>]*>/g)) assert.match(tag[0], /rel="noopener noreferrer"/);
+});
+
+
+test('filter counts match the cards and every category has a filter', () => {
+  const categories = [...html.matchAll(/data-category="([^"]+)"/g)].map(m => m[1]);
+  const filters = [...html.matchAll(/data-filter="([^"]+)"[^>]*>[^<]+<sup>(\d+)<\/sup>/g)];
+  assert.ok(filters.length > 1);
+  for (const [, category, count] of filters) {
+    assert.equal(Number(count), category === 'all' ? categories.length : categories.filter(c => c === category).length, category);
+  }
+  for (const category of categories) assert.ok(filters.some(f => f[1] === category));
 });

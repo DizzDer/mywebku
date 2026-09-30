@@ -11,3 +11,12 @@
 - Browser error log was empty during verification.
 
 Reduced-motion and offscreen/hidden-document pause are implemented. No exhaustive assistive-technology audit or device-farm performance certification is claimed. Project graphics are illustrations, not real-time application data.
+
+## Repository update — 2026-09-30
+
+- Added FireScout, Durable Journal, АРМ Кафедра, CS2 LAN Practice and ToDo Task Manager; descriptions checked against their READMEs.
+- Node syntax check and all 4 tests passed, including category/count consistency.
+- Edge: all 6 filters returned the expected counts; all 5 new dialogs opened with the correct repository links.
+- Escape closed the FireScout dialog and restored trigger focus.
+- 390px viewport: no horizontal overflow; filter wrapping and FireScout card visually inspected.
+- No browser console errors during the checks.
