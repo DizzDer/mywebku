@@ -10,7 +10,7 @@ test('all local anchors and assets resolve', () => {
   assert.equal(new Set(ids).size, ids.length, 'IDs must be unique');
   for (const [, target] of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
     if (target.startsWith('#')) assert.ok(ids.includes(target.slice(1)), target);
-    else if (!/^(https?:|mailto:)/.test(target)) assert.ok(fs.existsSync(path.join(root, target)), target);
+    else if (!/^(https?:|mailto:)/.test(target)) assert.ok(fs.existsSync(path.join(root, target.split(/[?#]/)[0])), target);
   }
 });
 test('every project opens a documented repository', () => {
