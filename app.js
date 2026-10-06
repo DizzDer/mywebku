@@ -277,9 +277,9 @@ document.querySelector('#copy-email').addEventListener('click', async () => {
   const status = document.querySelector('#copy-status');
   try {
     if (!navigator.clipboard?.writeText) throw new Error('Clipboard unavailable');
-    await navigator.clipboard.writeText('quat.kanatuly@gmail.com');
+    await navigator.clipboard.writeText('kuatkanatuly2007@gmail.com');
     status.textContent = 'Email скопирован. До связи!';
-  } catch { status.textContent = 'quat.kanatuly@gmail.com — можно скопировать вручную.'; }
+  } catch { status.textContent = 'kuatkanatuly2007@gmail.com — можно скопировать вручную.'; }
 });
 document.querySelector('#year').textContent = new Date().getFullYear();
 

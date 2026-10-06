@@ -22,7 +22,7 @@ test('every project opens a documented repository', () => {
 test('primary identity, contacts and baseline accessibility remain present', () => {
   assert.equal((html.match(/<h1\b/g) || []).length, 1);
   assert.ok(html.includes('lang="ru"'));
-  assert.ok(html.includes('mailto:quat.kanatuly@gmail.com'));
+  assert.ok(html.includes('mailto:kuatkanatuly2007@gmail.com'));
   assert.ok(html.includes('https://t.me/DizzDer'));
   assert.ok(html.includes('class="skip-link"'));
   assert.ok(html.includes('aria-labelledby="dialog-title"'));
