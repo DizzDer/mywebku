@@ -134,209 +134,255 @@ const projects = {
 }
 };
 
-// Filtering keeps the document readable without JavaScript; only user actions hide cards.
-const filterButtons = [...document.querySelectorAll('[data-filter]')];
-const cards = [...document.querySelectorAll('[data-category]')];
-for (const button of filterButtons) {
-  button.addEventListener('click', () => {
-    for (const item of filterButtons) {
-      const selected = item === button;
-      item.classList.toggle('active', selected);
-      item.setAttribute('aria-pressed', String(selected));
-    }
-    let visible = 0;
-    for (const card of cards) {
-      card.hidden = button.dataset.filter !== 'all' && card.dataset.category !== button.dataset.filter;
-      if (!card.hidden) visible++;
-    }
-    document.querySelector('#filter-status').textContent = `Показано проектов: ${visible} из ${cards.length}`;
-  });
+
+// Progressive enhancement: all four screens remain available without JavaScript.
+const screens = [...document.querySelectorAll('.screen')];
+const menuChoices = [...document.querySelectorAll('.menu-choice')];
+const stage = document.querySelector('.stage');
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+let scene = 'home';
+let entered = false;
+let selectedMenu = 0;
+let motionPaused = reducedMotion.matches;
+let transitionTimer;
+document.body.classList.add('ready');
+
+function updateVideos() {
+  for (const screen of screens) {
+    const video = screen.querySelector('video');
+    if (!video) continue;
+    const playing = entered && !screen.hidden && !motionPaused && !document.hidden;
+    if (playing) {
+      if (!video.getAttribute('src')) video.src = video.dataset.src;
+      video.play().catch(() => {}); // Posters remain when autoplay is unavailable.
+    } else video.pause();
+  }
+  document.querySelector('#motion-toggle').setAttribute('aria-pressed', String(motionPaused));
+  document.querySelector('#motion-toggle').textContent = motionPaused ? '▶' : 'Ⅱ';
+  document.querySelector('#motion-toggle').setAttribute('aria-label', motionPaused ? 'Включить фоновые анимации' : 'Приостановить фоновые анимации');
 }
 
-const dialog = document.querySelector('#project-dialog');
-let dialogOpener = null;
-for (const button of document.querySelectorAll('[data-project]')) {
-  button.addEventListener('click', () => {
-    const project = projects[button.dataset.project];
-    if (!project) return;
-    document.querySelector('#dialog-type').textContent = project.type;
-    document.querySelector('#dialog-title').textContent = project.title;
-    document.querySelector('#dialog-intro').textContent = project.intro;
-    document.querySelector('#dialog-note').textContent = project.note;
-    document.querySelector('#dialog-repo').href = project.url;
-    const features = document.querySelector('#dialog-features');
-    features.replaceChildren(...project.features.map(text => {
-      const li = document.createElement('li'); li.textContent = text; return li;
-    }));
-    document.querySelector('#dialog-stack').replaceChildren(...project.stack.map(text => {
-      const span = document.createElement('span'); span.textContent = text; return span;
-    }));
-    dialogOpener = button;
-    document.body.classList.add('dialog-open');
-    dialog.showModal();
-    dialog.scrollTop = 0;
-    document.querySelector('#dialog-close').focus();
-  });
+function showScene(id, focus = true) {
+  if (!screens.some(s => s.id === id)) id = 'home';
+  const changed = scene !== id;
+  scene = id;
+  document.body.dataset.scene = id;
+  for (const screen of screens) screen.hidden = screen.id !== id;
+  if (changed) document.querySelector(`#${id}`).scrollTop = 0;
+  document.querySelector('#back-home').hidden = id === 'home';
+  if (changed && entered && !reducedMotion.matches) {
+    clearTimeout(transitionTimer);
+    document.body.classList.remove('switching');
+    void document.body.offsetWidth;
+    document.body.classList.add('switching');
+    transitionTimer = setTimeout(() => document.body.classList.remove('switching'), 650);
+  }
+  updateVideos();
+  if (entered && focus) {
+    const target = id === 'home' ? menuChoices[selectedMenu] : document.querySelector(`#${id} h2`);
+    target?.focus({preventScroll:true});
+  }
 }
+
+function selectMenu(index, focus = false) {
+  selectedMenu = (index + menuChoices.length) % menuChoices.length;
+  menuChoices.forEach((item, i) => item.classList.toggle('selected', i === selectedMenu));
+  if (focus) menuChoices[selectedMenu].focus({preventScroll:true});
+}
+menuChoices.forEach((item, i) => {
+  item.addEventListener('pointerenter', () => selectMenu(i));
+  item.addEventListener('focus', () => selectMenu(i));
+});
+window.addEventListener('hashchange', () => showScene(location.hash.slice(1)));
+window.addEventListener('popstate', () => showScene(location.hash.slice(1) || 'home'));
+document.querySelectorAll('a[href^="#"]').forEach(link => link.addEventListener('click', event => {
+  const id = link.getAttribute('href').slice(1);
+  if (!screens.some(s => s.id === id)) return;
+  event.preventDefault();
+  if (location.hash !== `#${id}`) history.pushState(null, '', `#${id}`);
+  showScene(id);
+}));
+showScene(location.hash.slice(1) || 'home', false);
+document.querySelector('#motion-toggle').addEventListener('click', () => { motionPaused = !motionPaused; updateVideos(); });
+reducedMotion.addEventListener('change', event => { motionPaused = event.matches; updateVideos(); });
+document.addEventListener('visibilitychange', updateVideos);
+
+// Project filters and native, focus-trapping dialog.
+const filterButtons = [...document.querySelectorAll('[data-filter]')];
+const cards = [...document.querySelectorAll('[data-category]')];
+filterButtons.forEach(button => button.addEventListener('click', () => {
+  filterButtons.forEach(item => {
+    item.classList.toggle('active', item === button);
+    item.setAttribute('aria-pressed', String(item === button));
+  });
+  let visible = 0;
+  cards.forEach(card => {
+    card.hidden = button.dataset.filter !== 'all' && card.dataset.category !== button.dataset.filter;
+    if (!card.hidden) visible++;
+  });
+  document.querySelector('#filter-status').textContent = `Показано проектов: ${visible} из ${cards.length}`;
+}));
+const dialog = document.querySelector('#project-dialog');
+let dialogOpener;
+document.querySelectorAll('[data-project]').forEach(button => button.addEventListener('click', () => {
+  const project = projects[button.dataset.project];
+  if (!project) return;
+  for (const [field, value] of Object.entries({type:project.type,title:project.title,intro:project.intro,note:project.note})) {
+    document.querySelector(`#dialog-${field}`).textContent = value;
+  }
+  document.querySelector('#dialog-repo').href = project.url;
+  document.querySelector('#dialog-features').replaceChildren(...project.features.map(text => {
+    const li = document.createElement('li'); li.textContent = text; return li;
+  }));
+  document.querySelector('#dialog-stack').replaceChildren(...project.stack.map(text => {
+    const span = document.createElement('span'); span.textContent = text; return span;
+  }));
+  dialogOpener = button;
+  dialog.showModal();
+  dialog.scrollTop = 0;
+  document.querySelector('#dialog-close').focus();
+}));
 document.querySelector('#dialog-close').addEventListener('click', () => dialog.close());
 dialog.addEventListener('click', event => {
   if (event.target !== dialog) return;
   const box = dialog.getBoundingClientRect();
   if (event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom) dialog.close();
 });
-dialog.addEventListener('close', () => {
-  document.body.classList.remove('dialog-open');
-  dialogOpener?.focus();
-});
+dialog.addEventListener('close', () => dialogOpener?.focus());
 
-const menuButton = document.querySelector('.menu-toggle');
-const mobileNav = document.querySelector('#mobile-nav');
-function closeMenu() {
-  mobileNav.hidden = true;
-  menuButton.setAttribute('aria-expanded', 'false');
-  menuButton.setAttribute('aria-label', 'Открыть меню');
+// Roving tab focus, including arrow, Home and End keys.
+const skillTabs = [...document.querySelectorAll('[data-skill]')];
+function selectSkill(button, focus = false) {
+  skillTabs.forEach(tab => {
+    const active = tab === button;
+    tab.setAttribute('aria-selected', String(active));
+    tab.tabIndex = active ? 0 : -1;
+    document.querySelector(`#${tab.getAttribute('aria-controls')}`).hidden = !active;
+  });
+  if (focus) button.focus();
 }
-menuButton.addEventListener('click', () => {
-  const opening = mobileNav.hidden;
-  mobileNav.hidden = !opening;
-  menuButton.setAttribute('aria-expanded', String(opening));
-  menuButton.setAttribute('aria-label', opening ? 'Закрыть меню' : 'Открыть меню');
+skillTabs.forEach((tab,i) => {
+  tab.addEventListener('click', () => selectSkill(tab));
+  tab.addEventListener('keydown', event => {
+    let target;
+    if (event.key === 'ArrowRight') target = (i+1) % skillTabs.length;
+    if (event.key === 'ArrowLeft') target = (i-1+skillTabs.length) % skillTabs.length;
+    if (event.key === 'Home') target = 0;
+    if (event.key === 'End') target = skillTabs.length-1;
+    if (target !== undefined) { event.preventDefault(); selectSkill(skillTabs[target], true); }
+  });
 });
-for (const link of mobileNav.querySelectorAll('a')) link.addEventListener('click', closeMenu);
-document.addEventListener('keydown', event => {
-  if (event.key === 'Escape' && !mobileNav.hidden) { closeMenu(); menuButton.focus(); }
-});
-window.matchMedia('(min-width: 761px)').addEventListener('change', event => { if (event.matches) closeMenu(); });
-
+selectSkill(skillTabs[0]);
 document.querySelector('#copy-email').addEventListener('click', async () => {
   const status = document.querySelector('#copy-status');
   try {
-    if (!navigator.clipboard?.writeText) throw new Error('Clipboard is unavailable');
+    if (!navigator.clipboard?.writeText) throw new Error('Clipboard unavailable');
     await navigator.clipboard.writeText('quat.kanatuly@gmail.com');
     status.textContent = 'Email скопирован. До связи!';
-  } catch {
-    status.textContent = 'Email: quat.kanatuly@gmail.com — можно скопировать вручную.';
-  }
+  } catch { status.textContent = 'quat.kanatuly@gmail.com — можно скопировать вручную.'; }
 });
 document.querySelector('#year').textContent = new Date().getFullYear();
 
-// Original procedural tube meshes. No assets, WebGL, libraries or remote calls.
-(() => {
-  const canvas = document.querySelector('#sculpture');
-  const context = canvas.getContext('2d');
-  const motionButton = document.querySelector('#motion-toggle');
-  const shapeButton = document.querySelector('#shape-next');
-  if (!context) { motionButton.disabled = true; shapeButton.disabled = true; return; }
-  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  let paused = reducedMotion.matches;
-  let visible = true;
-  let frame = 0;
-  let lastTime = 0;
-  let angle = .5;
-  let tilt = -.48;
-  let shape = 0;
-  let width = 0, height = 0;
-  let pointer = null;
-  const ringCount = 112, sides = 14;
-  let mesh = [];
-  const normalize = v => { const d = Math.hypot(...v) || 1; return v.map(x => x / d); };
-  const cross = (a, b) => [a[1]*b[2]-a[2]*b[1], a[2]*b[0]-a[0]*b[2], a[0]*b[1]-a[1]*b[0]];
-  const center = t => {
-    if (shape === 1) return [1.6*Math.cos(t), 1.6*Math.sin(t), .38*Math.sin(4*t)];
-    if (shape === 2) return [1.55*Math.cos(t), 1.1*Math.sin(2*t), 1.05*Math.sin(t)];
-    const r = 1.2 + .42*Math.cos(3*t);
-    return [r*Math.cos(2*t), r*Math.sin(2*t), .65*Math.sin(3*t)];
-  };
-  function makeMesh() {
-    mesh = [];
-    for (let i = 0; i < ringCount; i++) {
-      const t = i / ringCount * Math.PI * 2;
-      const c = center(t), next = center(t + .001);
-      const tangent = normalize(next.map((x, j) => x - c[j]));
-      const normal = normalize(cross(tangent, [0, 0, 1]));
-      const binormal = normalize(cross(tangent, normal));
-      const tube = shape === 1 ? .38 : .29;
-      const ring = [];
-      for (let j = 0; j < sides; j++) {
-        const a = j / sides * Math.PI * 2;
-        ring.push(c.map((x, k) => x + tube*(normal[k]*Math.cos(a) + binormal[k]*Math.sin(a))));
-      }
-      mesh.push(ring);
+// Use the official music release through a visible YouTube player.
+// No soundtrack is extracted, redistributed or included in the repository.
+const entry = document.querySelector('#entry-screen');
+const musicDock = document.querySelector('#music-dock');
+const musicToggle = document.querySelector('#music-toggle');
+const musicStatus = document.querySelector('#player-status');
+let player;
+let playerReady = false;
+let musicRequested = false;
+function setMusicState(playing) {
+  musicToggle.setAttribute('aria-pressed', String(playing));
+  document.querySelector('#music-state').textContent = playing ? 'ON' : 'OFF';
+}
+function startMusic() {
+  musicRequested = true;
+  musicDock.hidden = false;
+  if (playerReady) {
+    player.unMute();
+    player.setVolume(35);
+    player.playVideo();
+  } else musicStatus.textContent = 'Загружаем Last Surprise…';
+}
+function stopMusic() {
+  musicRequested = false;
+  if (playerReady) player.pauseVideo();
+  musicDock.hidden = true;
+  setMusicState(false);
+}
+musicToggle.addEventListener('click', () => {
+  if (musicRequested) stopMusic();
+  else startMusic();
+});
+document.querySelector('#music-close').addEventListener('click', () => { stopMusic(); musicToggle.focus(); });
+window.onYouTubeIframeAPIReady = () => {
+  const vars = {controls:1,playsinline:1,rel:0,loop:1,playlist:'ZNGqBDRJgvo'};
+  if (/^https?:$/.test(location.protocol)) vars.origin = location.origin;
+  player = new YT.Player('youtube-player', {
+    host:'https://www.youtube-nocookie.com', width:240, height:200,
+    videoId:'ZNGqBDRJgvo', playerVars:vars,
+    events:{
+      onReady:() => {
+        playerReady = true;
+        musicStatus.textContent = 'Last Surprise · Persona 5';
+        if (musicRequested) startMusic();
+      },
+      onStateChange:event => {
+        setMusicState(event.data === YT.PlayerState.PLAYING);
+        if (event.data === YT.PlayerState.PLAYING) musicStatus.textContent = 'Last Surprise · Persona 5';
+        if (event.data === YT.PlayerState.PAUSED) musicStatus.textContent = 'На паузе · нажмите ▶ в плеере';
+      },
+      onAutoplayBlocked:() => { setMusicState(false); musicStatus.textContent = 'Нажмите ▶ в плеере, чтобы включить звук.'; },
+      onError:() => { setMusicState(false); musicStatus.textContent = 'Трек недоступен здесь — откройте на YouTube.'; }
     }
-  }
-  function rotate(v) {
-    const ca = Math.cos(angle), sa = Math.sin(angle), ct = Math.cos(tilt), st = Math.sin(tilt);
-    const x = v[0]*ca + v[2]*sa, z = -v[0]*sa + v[2]*ca;
-    const y = v[1]*ct - z*st, rz = v[1]*st + z*ct;
-    return [x*.965 - y*.262, x*.262 + y*.965, rz];
-  }
-  function draw() {
-    context.clearRect(0, 0, width, height);
-    if (!width || !height) return;
-    const scale = Math.min(width*.21, height*.235);
-    const yCenter = height*.5;
-    const shadow = context.createRadialGradient(width*.5, height*.79, 1, width*.5, height*.79, scale*1.3);
-    shadow.addColorStop(0, 'rgba(89,64,33,.18)'); shadow.addColorStop(1, 'rgba(89,64,33,0)');
-    context.save(); context.translate(width*.5, height*.81); context.scale(1,.21); context.translate(-width*.5,-height*.79); context.fillStyle=shadow; context.fillRect(0,0,width,height*2); context.restore();
-    const transformed = mesh.map(ring => ring.map(rotate));
-    const faces = [];
-    for (let i = 0; i < ringCount; i++) {
-      for (let j = 0; j < sides; j++) {
-        const points = [transformed[i][j],transformed[(i+1)%ringCount][j],transformed[(i+1)%ringCount][(j+1)%sides],transformed[i][(j+1)%sides]];
-        const a = points[1].map((x,k) => x-points[0][k]), b = points[3].map((x,k) => x-points[0][k]);
-        const n = normalize(cross(a,b));
-        const light = Math.max(0, -n[0]*-.35 - n[1]*-.6 - n[2]*.7);
-        faces.push({ points, depth: points.reduce((s,p) => s+p[2],0), light });
-      }
-    }
-    faces.sort((a,b) => a.depth-b.depth);
-    for (const face of faces) {
-      context.beginPath();
-      face.points.forEach((p,i) => { const perspective=5.8/(5.8-p[2]); const x=width/2+p[0]*scale*perspective, y=yCenter+p[1]*scale*perspective; if(i===0) context.moveTo(x,y); else context.lineTo(x,y); });
-      context.closePath();
-      context.fillStyle=`hsl(${16 + face.light*5} 95% ${37 + face.light*26}%)`;
-      context.fill(); context.strokeStyle='rgba(75,29,8,.13)'; context.lineWidth=.45; context.stroke();
-    }
-  }
-  function stop() { if (frame) cancelAnimationFrame(frame); frame=0; lastTime=0; }
-  function tick(time) {
-    frame=0;
-    if(paused || !visible || document.hidden) return;
-    const delta=lastTime ? Math.min(time-lastTime,50) : 0; lastTime=time;
-    if(!pointer) angle += delta*.00015;
-    draw(); frame=requestAnimationFrame(tick);
-  }
-  function syncMotion() {
-    stop();
-    motionButton.textContent=paused ? '▶' : 'Ⅱ';
-    motionButton.setAttribute('aria-pressed',String(paused));
-    motionButton.setAttribute('aria-label',paused ? 'Продолжить анимацию' : 'Приостановить анимацию');
-    draw();
-    if(!paused && visible && !document.hidden) frame=requestAnimationFrame(tick);
-  }
-  function resize() {
-    const bounds=canvas.getBoundingClientRect(); width=bounds.width; height=bounds.height;
-    const ratio=Math.min(window.devicePixelRatio || 1,2);
-    canvas.width=Math.round(width*ratio); canvas.height=Math.round(height*ratio);
-    context.setTransform(ratio,0,0,ratio,0,0); draw();
-  }
-  motionButton.addEventListener('click',() => { paused=!paused; syncMotion(); });
-  shapeButton.addEventListener('click',() => { shape=(shape+1)%3; document.querySelector('#shape-number').textContent=String(shape+1).padStart(3,'0'); makeMesh(); draw(); });
-  reducedMotion.addEventListener('change',event => { paused=event.matches; syncMotion(); });
-  document.addEventListener('visibilitychange',syncMotion);
-  canvas.addEventListener('pointerdown',event => {
-    if(event.button!==0) return;
-    pointer={id:event.pointerId,x:event.clientX,y:event.clientY}; canvas.setPointerCapture(event.pointerId); canvas.classList.add('dragging');
   });
-  canvas.addEventListener('pointermove',event => {
-    if(!pointer || pointer.id!==event.pointerId) return;
-    angle+=(event.clientX-pointer.x)*.009; tilt=Math.max(-1.3,Math.min(1.3,tilt+(event.clientY-pointer.y)*.006));
-    pointer.x=event.clientX; pointer.y=event.clientY; draw();
-  });
-  const release=event => { if(pointer?.id!==event.pointerId) return; pointer=null; canvas.classList.remove('dragging'); if(canvas.hasPointerCapture(event.pointerId)) canvas.releasePointerCapture(event.pointerId); };
-  canvas.addEventListener('pointerup',release); canvas.addEventListener('pointercancel',release);
-  makeMesh(); resize(); syncMotion();
-  new ResizeObserver(resize).observe(canvas);
-  new IntersectionObserver(entries => { visible=entries[0].isIntersecting; syncMotion(); },{threshold:0}).observe(canvas);
-})();
+};
+const apiScript = document.createElement('script');
+apiScript.src = 'https://www.youtube.com/iframe_api';
+apiScript.async = true;
+apiScript.onerror = () => { musicStatus.textContent = 'YouTube недоступен. Откройте трек по ссылке ниже.'; };
+document.head.append(apiScript);
 
+function enterSite(withMusic) {
+  if (entered) return;
+  entered = true;
+  entry.hidden = true;
+  stage.inert = false;
+  document.querySelector('.site-header').inert = false;
+  document.querySelector('.hud').inert = false;
+  if (withMusic) startMusic();
+  showScene(scene);
+}
+entry.hidden = false;
+stage.inert = true;
+document.querySelector('.site-header').inert = true;
+document.querySelector('.hud').inert = true;
+document.querySelector('#enter-music').addEventListener('click', () => enterSite(true));
+document.querySelector('#enter-quiet').addEventListener('click', () => enterSite(false));
+document.querySelector('#enter-music').focus({preventScroll:true});
+entry.addEventListener('keydown', event => {
+  if (event.key !== 'Tab') return;
+  const first = document.querySelector('#enter-music');
+  const last = document.querySelector('#enter-quiet');
+  if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+  else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+});
+document.addEventListener('keydown', event => {
+  if (event.defaultPrevented || dialog.open) return;
+  if (!entered) {
+    if (event.key === 'Escape') enterSite(false);
+    return;
+  }
+  if (['INPUT','TEXTAREA','SELECT'].includes(event.target.tagName) || musicDock.contains(event.target)) return;
+  if (event.key === 'Escape') {
+    if (scene !== 'home') { event.preventDefault(); history.pushState(null, '', '#home'); showScene('home'); }
+    return;
+  }
+  if (scene !== 'home') return;
+  if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+    event.preventDefault(); selectMenu(selectedMenu + (event.key === 'ArrowDown' ? 1 : -1), true);
+  } else if (event.key === 'Enter' && (event.target === document.body || menuChoices.includes(event.target))) {
+    event.preventDefault(); menuChoices[selectedMenu].click();
+  }
+});

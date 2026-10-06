@@ -1,22 +1,13 @@
-# Validation — 2026-09-28
+# Проверка — 2026-10-06
 
-- `node --check app.js`: passed.
-- `node --test tests/site.test.cjs`: 3 passed (anchors/assets, project mapping, identity/accessibility baseline).
-- Desktop browser: all 4 projects, Backend/C++/All filters, all 4 project dialogs and repository destinations checked.
-- Escape closes the native dialog; focus returns to the project trigger.
-- Canvas pause and shape switch checked.
-- Mobile: 390px and 320px widths checked with no horizontal overflow.
-- Mobile navigation opens and closes after following an anchor.
-- Email copy reports success in the browser; the implementation also displays a manual-copy fallback on failure.
-- Browser error log was empty during verification.
+- `node --check app.js` — успешно.
+- `node --test tests/site.test.cjs` — 4/4 успешно: IDs, локальные ссылки/ресурсы, девять проектов, контакты, доступность и количества фильтров.
+- В Microsoft Edge открыты все девять диалогов; заголовки и ссылки GitHub соответствуют проектам. Проверено закрытие.
+- Фильтры показывают 9 / 5 / 1 / 1 / 1 / 1 карточек для All / C++ / Backend / Web / Android / Tools.
+- Все четыре категории навыков открывают соответствующие панели.
+- Главное меню, проекты, Skills, About и контакты проверены визуально. Внутренняя навигация не вызывает случайную прокрутку страницы.
+- Last Surprise воспроизводилась через встроенный официальный YouTube-плеер. Переключатель показывал ON при воспроизведении. Есть штатные кнопки управления и прямая ссылка на трек.
+- На 390×844 и 320×740 проверены адаптив, кнопка возврата и прокрутка проектов. Горизонтальная ширина документа равна ширине экрана.
+- В журнале браузера нет ошибок приложения.
 
-Reduced-motion and offscreen/hidden-document pause are implemented. No exhaustive assistive-technology audit or device-farm performance certification is claimed. Project graphics are illustrations, not real-time application data.
-
-## Repository update — 2026-09-30
-
-- Added FireScout, Durable Journal, АРМ Кафедра, CS2 LAN Practice and ToDo Task Manager; descriptions checked against their READMEs.
-- Node syntax check and all 4 tests passed, including category/count consistency.
-- Edge: all 6 filters returned the expected counts; all 5 new dialogs opened with the correct repository links.
-- Escape closed the FireScout dialog and restored trigger focus.
-- 390px viewport: no horizontal overflow; filter wrapping and FireScout card visually inspected.
-- No browser console errors during the checks.
+YouTube может требовать дополнительное нажатие ▶ из-за ограничений автозапуска, настроек браузера или условий доступа в сети. Это предусмотрено интерфейсом; безусловный autoplay не заявляется.

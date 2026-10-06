@@ -1,23 +1,13 @@
-# Design notes
+# Дизайн Portfolio Reload
 
-## Direction
+Референс пользователя: https://www.tiktok.com/@ilhmnufi/video/7692221033012759828
 
-An editorial portfolio rather than a dashboard: warm paper, near-black type, signal orange, large typographic rhythm and restrained rules. The identity uses the existing DizzDer handle and the name/location already in the original portfolio. No invented clients, employment history, ratings or years of experience.
+Главное меню повторяет композицию: инвертированный персонаж слева, синяя вода справа, наклонная стопка из четырёх пунктов. Выбор выделяется белым шевроном, розовым краем и красной типографикой. Имя заменено на DizzDer; содержимое адаптировано под существующие девять проектов и контакты владельца.
 
-## References studied
+Разделы открываются как игровые экраны. Заголовки лежат на наклонных тёмных баннерах с голубыми краями. Карточки имеют римские номера и ссылки на исходники; About — тёмную карточку профиля; Contact — интерфейс сообщений MAIL. Геометрия реализована собственным CSS, интерактивность — собственным JavaScript.
 
-- [Bruno Simon](https://bruno-simon.com/): a memorable interaction can itself demonstrate craft. Here that becomes a small, original Canvas study, with an immediate path to projects instead of a game gate.
-- [Brittany Chiang](https://brittanychiang.com/): readable project evidence and clear routes to the work. The portfolio keeps repository links and concrete implementation notes.
-- [Rauno Freiberg](https://rauno.me/): bold typographic composition and attention to interaction details. This implementation has its own layout, palette and geometry.
+Фоновые анимации соответствующих сцен взяты из открытого примера https://github.com/Ikhsansukaweb/portfolio-persona3/tree/main/assets и подготовлены в H.264 без звука. Игровая графика © ATLUS / SEGA, указана в футере. Программные исходники примера и коммерческие Rodin/Skip fonts не копировались. Используются Barlow Condensed и Roboto Condensed.
 
-No code, screenshots or visual assets were copied from the reference sites.
+Музыкальный источник — официальный релиз Last Surprise, предоставленный NexTone Inc. на канале Lyn - Topic: https://www.youtube.com/watch?v=ZNGqBDRJgvo . Видимый плеер 240×200 px сохраняет штатные элементы управления. При блокировке автозапуска показывается инструкция нажать ▶; при недоступности ролика — ссылка на оригинал. Звук не зависит от фоновых видео и не извлекается из YouTube.
 
-## Interaction rules
-
-Content is visible immediately; no loading screen, scroll hijacking or custom cursor. The sculpture pauses offscreen and when the document is hidden. Reduced motion starts it paused. It can be changed with buttons, so dragging is not required. Native dialog supplies modal focus containment and Escape; closing restores focus to the opening button. Filters use real buttons and announce result counts.
-
-The project illustrations are original CSS/SVG diagrams. They are conceptual illustrations, not claims about live service metrics. Details identify the scope and limits of each project.
-
-## Scope and performance
-
-No framework, dependency loader, analytics, API keys or contact backend. Canvas caps device-pixel ratio at 2 and uses a small mesh. The content does not depend on Canvas. Fonts have system fallbacks; the main document and all local assets are static and use relative paths for GitHub Pages.
+Адаптив сохраняет стиль на телефонах. Видео лениво загружаются только для открытого экрана; неактивные останавливаются. prefers-reduced-motion оставляет постеры и отключает круговые переходы. Диалоги возвращают фокус, категории навыков используют tab/tabpanel.
